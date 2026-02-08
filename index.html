@@ -41,6 +41,11 @@
             --section-x: clamp(20px, 5vw, 40px);
             --section-y: clamp(80px, 10vw, 120px);
             --content-max: 960px;
+
+            --radius-sm: 12px;
+            --radius-md: 20px;
+            --radius-lg: 28px;
+            --radius-pill: 100px;
         }
 
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -58,18 +63,19 @@
             inset: 0;
             pointer-events: none;
             z-index: 9999;
-            opacity: 0.03;
+            opacity: 0.025;
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
             background-size: 200px;
         }
 
-        /* HERO */
+        /* ===================== HERO ===================== */
         .hero {
             position: relative;
             min-height: 100vh;
             min-height: 100dvh;
             display: flex;
             align-items: center;
+            justify-content: center;
             overflow: hidden;
         }
 
@@ -103,9 +109,9 @@
         .hero-content {
             position: relative;
             z-index: 3;
-            padding: 0 var(--section-x);
-            max-width: 640px;
-            margin-left: clamp(var(--s-24), 8vw, 140px);
+            text-align: center;
+            max-width: 600px;
+            padding: 0 var(--s-24);
         }
 
         .hero-wordmark {
@@ -137,9 +143,9 @@
             font-size: clamp(0.95rem, 1.6vw, 1.08rem);
             color: var(--warm-gray);
             line-height: 1.75;
-            max-width: 380px;
+            max-width: 420px;
+            margin: 0 auto var(--s-40);
             font-weight: 300;
-            margin-bottom: var(--s-40);
             opacity: 0;
             animation: rise 1.4s cubic-bezier(0.19, 1, 0.22, 1) 0.55s forwards;
         }
@@ -154,22 +160,23 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* FORM */
+        /* ===================== FORM ===================== */
         .waitlist-form {
             display: flex;
             align-items: stretch;
             max-width: 400px;
-            border: 1.5px solid rgba(44, 36, 24, 0.1);
-            border-radius: 100px;
-            background: rgba(255, 255, 255, 0.55);
+            border: 1.5px solid rgba(44, 36, 24, 0.08);
+            border-radius: var(--radius-pill);
+            background: rgba(255, 255, 255, 0.6);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             overflow: hidden;
             transition: border-color 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 24px rgba(139, 115, 85, 0.08);
         }
         .waitlist-form:focus-within {
             border-color: var(--terracotta);
-            box-shadow: 0 0 0 3px var(--terracotta-mist);
+            box-shadow: 0 4px 24px rgba(196, 112, 75, 0.12);
         }
         .waitlist-form input {
             font-family: var(--font-body);
@@ -196,6 +203,7 @@
             transition: background 0.25s;
             white-space: nowrap;
             letter-spacing: 0.03em;
+            border-radius: 0 var(--radius-pill) var(--radius-pill) 0;
         }
         .waitlist-form button:hover { background: var(--terracotta-deep); }
         .waitlist-form button:disabled { opacity: 0.5; cursor: not-allowed; }
@@ -215,7 +223,7 @@
         }
         .form-success span { font-size: 0.85rem; color: var(--warm-gray); font-weight: 300; }
 
-        /* SHARED */
+        /* ===================== SHARED ===================== */
         .section-eyebrow {
             font-family: var(--font-body);
             font-size: 0.68rem;
@@ -224,39 +232,40 @@
             font-weight: 500;
             margin-bottom: var(--s-16);
         }
-        .divider-line {
-            width: 1px;
-            height: var(--s-64);
-            margin: 0 auto;
-            background: linear-gradient(180deg, var(--sand), transparent);
-        }
 
-        /* QUOTE */
+        /* ===================== QUOTE ===================== */
         .quote-section {
             background: var(--muslin);
-            padding: var(--s-80) var(--section-x) var(--s-96);
+            padding: var(--s-96) var(--section-x);
             display: flex;
             justify-content: center;
         }
         .quote-inner {
-            max-width: 540px;
+            max-width: 580px;
+            background: var(--cream);
+            padding: var(--s-48) var(--s-56);
+            border-radius: var(--radius-lg);
+            box-shadow: 0 4px 32px rgba(139, 115, 85, 0.06);
+            text-align: center;
             position: relative;
-            padding-left: var(--s-32);
         }
         .quote-inner::before {
-            content: '';
+            content: '\201C';
+            font-family: var(--font-display);
+            font-size: 5rem;
+            color: var(--terracotta);
+            opacity: 0.2;
             position: absolute;
-            left: 0; top: var(--s-4); bottom: var(--s-4);
-            width: 2px;
-            background: var(--terracotta);
-            border-radius: 1px;
+            top: var(--s-8);
+            left: var(--s-32);
+            line-height: 1;
         }
         .quote-section blockquote {
             font-family: var(--font-display);
             font-style: italic;
-            font-size: clamp(1.25rem, 2.8vw, 1.7rem);
+            font-size: clamp(1.2rem, 2.6vw, 1.6rem);
             color: var(--warm-black);
-            line-height: 1.5;
+            line-height: 1.55;
             font-weight: 300;
             margin-bottom: var(--s-16);
         }
@@ -270,19 +279,12 @@
             display: block;
         }
 
-        /* PROBLEM */
+        /* ===================== PROBLEM ===================== */
         .problem {
-            background: var(--warm-black);
+            background: #33281d;
             color: var(--cream);
             padding: var(--section-y) var(--section-x);
             position: relative;
-        }
-        .problem::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            opacity: 0.02;
-            background: repeating-linear-gradient(0deg, transparent, transparent 79px, rgba(255,255,255,0.4) 79px, rgba(255,255,255,0.4) 80px);
         }
         .problem-inner {
             max-width: var(--content-max);
@@ -290,7 +292,7 @@
             position: relative;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: var(--s-80);
+            gap: var(--s-64);
             align-items: start;
         }
         .problem-text { position: sticky; top: var(--s-120); }
@@ -303,21 +305,27 @@
         }
         .problem h2 em { font-style: italic; color: var(--terracotta-glow); }
         .problem-lede { font-size: 0.95rem; color: var(--warm-gray-mid); line-height: 1.75; font-weight: 300; }
-        .problem-list { display: flex; flex-direction: column; }
+        .problem-list { display: flex; flex-direction: column; gap: var(--s-16); }
         .problem-item {
-            padding: var(--s-32) 0;
-            border-bottom: 1px solid rgba(255,255,255,0.06);
+            background: rgba(255,255,255,0.04);
+            border-radius: var(--radius-md);
+            padding: var(--s-24) var(--s-32);
             display: grid;
             grid-template-columns: var(--s-48) 1fr;
             gap: 0 var(--s-16);
             align-items: start;
+            border: 1px solid rgba(255,255,255,0.04);
+            transition: background 0.3s, border-color 0.3s;
         }
-        .problem-item:first-child { border-top: 1px solid rgba(255,255,255,0.06); }
+        .problem-item:hover {
+            background: rgba(255,255,255,0.06);
+            border-color: rgba(255,255,255,0.08);
+        }
         .problem-num {
             font-family: var(--font-display);
             font-size: 1.8rem;
             font-weight: 300;
-            color: rgba(196, 112, 75, 0.35);
+            color: rgba(196, 112, 75, 0.4);
             line-height: 1;
             padding-top: 2px;
         }
@@ -330,10 +338,10 @@
         }
         .problem-item p { font-size: 0.88rem; color: var(--warm-gray-mid); line-height: 1.65; font-weight: 300; grid-column: 2; }
 
-        /* STATS */
+        /* ===================== STATS ===================== */
         .stats {
-            background: var(--terracotta);
-            padding: var(--s-56) var(--section-x);
+            background: linear-gradient(135deg, #c87a56 0%, var(--terracotta) 50%, var(--terracotta-deep) 100%);
+            padding: var(--s-64) var(--section-x);
             position: relative;
             overflow: hidden;
         }
@@ -343,7 +351,7 @@
             inset: 0;
             background:
                 radial-gradient(ellipse 50% 100% at 15% 0%, rgba(255,255,255,0.06), transparent),
-                radial-gradient(ellipse 40% 80% at 85% 100%, rgba(0,0,0,0.08), transparent);
+                radial-gradient(ellipse 40% 80% at 85% 100%, rgba(0,0,0,0.06), transparent);
         }
         .stats-inner {
             max-width: var(--content-max);
@@ -363,10 +371,10 @@
             line-height: 1;
             margin-bottom: var(--s-8);
         }
-        .stat p { font-size: 0.8rem; color: rgba(255,255,255,0.7); line-height: 1.55; font-weight: 300; max-width: 180px; margin: 0 auto; }
-        .stat-divider { width: 1px; height: var(--s-48); background: rgba(255,255,255,0.15); flex-shrink: 0; }
+        .stat p { font-size: 0.8rem; color: rgba(255,255,255,0.75); line-height: 1.55; font-weight: 300; max-width: 180px; margin: 0 auto; }
+        .stat-divider { width: 1px; height: var(--s-48); background: rgba(255,255,255,0.15); flex-shrink: 0; border-radius: 1px; }
 
-        /* VOICES */
+        /* ===================== VOICES ===================== */
         .voices { background: var(--muslin); padding: var(--section-y) var(--section-x); }
         .voices-inner { max-width: var(--content-max); margin: 0 auto; }
         .voices-header { margin-bottom: var(--s-64); }
@@ -384,13 +392,26 @@
             margin-bottom: var(--s-24);
             background: var(--cream);
             padding: var(--s-32);
-            border-left: 2px solid var(--terracotta);
+            border-radius: var(--radius-md);
+            box-shadow: 0 2px 16px rgba(139, 115, 85, 0.05);
             transition: transform 0.4s ease, box-shadow 0.4s ease;
+            position: relative;
+            overflow: hidden;
         }
-        .voice-card:nth-child(2) { border-left-color: var(--chambray); }
-        .voice-card:nth-child(3) { border-left-color: var(--clay); }
-        .voice-card:nth-child(4) { border-left-color: var(--terracotta-glow); }
-        .voice-card:hover { transform: translateY(-2px); box-shadow: 0 16px 48px rgba(44,36,24,0.06); }
+        .voice-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--terracotta);
+            border-radius: var(--radius-md) var(--radius-md) 0 0;
+        }
+        .voice-card:nth-child(2)::before { background: var(--chambray); }
+        .voice-card:nth-child(3)::before { background: var(--clay); }
+        .voice-card:nth-child(4)::before { background: var(--terracotta-glow); }
+        .voice-card:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(139, 115, 85, 0.1); }
         .voice-card blockquote {
             font-family: var(--font-display);
             font-style: italic;
@@ -403,15 +424,12 @@
         .voice-source { font-size: 0.72rem; color: var(--warm-gray-light); font-weight: 400; letter-spacing: 0.04em; }
         .voice-source .votes { color: var(--terracotta); font-weight: 500; }
 
-        /* SOLUTION */
+        /* ===================== SOLUTION ===================== */
         .solution { background: var(--cream); padding: var(--section-y) var(--section-x); }
         .solution-inner { max-width: var(--content-max); margin: 0 auto; }
         .solution-header {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: var(--s-40);
-            margin-bottom: var(--s-80);
-            align-items: end;
+            text-align: center;
+            margin-bottom: var(--s-64);
         }
         .solution h2 {
             font-family: var(--font-display);
@@ -419,44 +437,79 @@
             color: var(--warm-black);
             font-weight: 400;
             line-height: 1.25;
+            margin-bottom: var(--s-16);
         }
         .solution h2 em { font-style: italic; }
-        .solution-lede { font-size: 0.95rem; color: var(--warm-gray); line-height: 1.75; font-weight: 300; max-width: 340px; align-self: end; }
-        .feature-editorial { display: flex; flex-direction: column; }
-        .feature-row {
-            display: grid;
-            grid-template-columns: var(--s-80) 1fr 1fr;
-            gap: 0 var(--s-32);
-            padding: var(--s-40) 0;
-            border-top: 1px solid rgba(44,36,24,0.07);
-            align-items: start;
-            transition: background 0.3s;
+        .solution-lede {
+            font-size: 0.95rem;
+            color: var(--warm-gray);
+            line-height: 1.75;
+            font-weight: 300;
+            max-width: 460px;
+            margin: 0 auto;
         }
-        .feature-row:last-child { border-bottom: 1px solid rgba(44,36,24,0.07); }
-        .feature-row:hover { background: var(--terracotta-mist); margin: 0 calc(-1 * var(--s-24)); padding-left: var(--s-24); padding-right: var(--s-24); }
-        .feature-num { font-family: var(--font-display); font-size: 0.72rem; font-weight: 500; color: var(--terracotta); letter-spacing: 0.15em; padding-top: var(--s-8); }
-        .feature-title { font-family: var(--font-display); font-size: 1.3rem; color: var(--warm-black); font-weight: 400; line-height: 1.3; padding-top: var(--s-4); }
-        .feature-desc { font-size: 0.9rem; color: var(--warm-gray); line-height: 1.7; font-weight: 300; }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--s-24);
+        }
+        .feature-card {
+            background: var(--muslin);
+            border-radius: var(--radius-lg);
+            padding: var(--s-32) var(--s-32) var(--s-24);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            box-shadow: 0 2px 12px rgba(139, 115, 85, 0.04);
+        }
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(139, 115, 85, 0.1);
+        }
+        .feature-num {
+            font-family: var(--font-display);
+            font-size: 0.72rem;
+            font-weight: 500;
+            color: var(--terracotta);
+            letter-spacing: 0.15em;
+            display: block;
+            margin-bottom: var(--s-16);
+        }
+        .feature-title {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            color: var(--warm-black);
+            font-weight: 400;
+            line-height: 1.3;
+            margin-bottom: var(--s-12);
+        }
+        .feature-desc {
+            font-size: 0.88rem;
+            color: var(--warm-gray);
+            line-height: 1.7;
+            font-weight: 300;
+            margin-bottom: var(--s-16);
+        }
         .feature-tag {
             display: inline-block;
-            margin-top: var(--s-12);
             font-size: 0.62rem;
             font-weight: 500;
             color: var(--terracotta);
             letter-spacing: 0.18em;
             text-transform: uppercase;
-            border: 1px solid rgba(196,112,75,0.18);
-            padding: var(--s-4) var(--s-12);
+            border: 1px solid rgba(196,112,75,0.15);
+            padding: var(--s-4) var(--s-16);
+            border-radius: var(--radius-pill);
+            background: rgba(196,112,75,0.04);
         }
 
-        /* CTA */
+        /* ===================== CTA ===================== */
         .cta {
             padding: var(--section-y) var(--section-x) 160px;
             text-align: center;
             position: relative;
             background:
                 radial-gradient(ellipse 90% 50% at 50% 100%, rgba(216,196,172,0.5), transparent),
-                linear-gradient(180deg, var(--cream) 0%, var(--muslin) 35%, var(--sand) 100%);
+                linear-gradient(180deg, var(--cream) 0%, var(--muslin) 35%, var(--parchment) 100%);
         }
         .cta-inner { max-width: 460px; margin: 0 auto; }
         .cta h2 {
@@ -471,14 +524,14 @@
         .cta-sub { font-size: 0.95rem; color: var(--warm-gray); line-height: 1.7; margin-bottom: var(--s-40); font-weight: 300; }
         .cta .waitlist-form { margin: 0 auto; }
 
-        /* FOOTER */
+        /* ===================== FOOTER ===================== */
         .site-footer { background: var(--warm-black); padding: var(--s-48) var(--section-x); text-align: center; }
         .footer-mark { font-family: var(--font-display); font-size: 0.8rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--warm-gray-mid); margin-bottom: var(--s-8); }
         .site-footer p { font-size: 0.75rem; color: rgba(155,146,134,0.5); font-weight: 300; }
         .site-footer a { color: var(--terracotta-glow); text-decoration: none; transition: color 0.3s; }
         .site-footer a:hover { color: var(--terracotta); }
 
-        /* REVEAL */
+        /* ===================== REVEAL ===================== */
         .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.9s cubic-bezier(0.19,1,0.22,1), transform 0.9s cubic-bezier(0.19,1,0.22,1); }
         .reveal.visible { opacity: 1; transform: translateY(0); }
         .reveal-d1 { transition-delay: 0.1s; }
@@ -486,28 +539,26 @@
         .reveal-d3 { transition-delay: 0.3s; }
         .reveal-d4 { transition-delay: 0.4s; }
 
-        /* RESPONSIVE */
+        /* ===================== RESPONSIVE ===================== */
         @media (max-width: 860px) {
-            .hero-content { margin-left: auto; margin-right: auto; text-align: center; padding: 0 var(--s-24); }
-            .hero-sub { margin-left: auto; margin-right: auto; }
+            .hero-content { padding: 0 var(--s-24); }
             .waitlist-form { margin: 0 auto; }
             .problem-inner { grid-template-columns: 1fr; gap: var(--s-48); }
             .problem-text { position: static; }
-            .solution-header { grid-template-columns: 1fr; gap: var(--s-16); }
-            .feature-row { grid-template-columns: 56px 1fr; gap: 0 var(--s-16); }
-            .feature-desc { grid-column: 2; margin-top: var(--s-8); }
+            .feature-grid { grid-template-columns: 1fr; }
             .stats-inner { flex-direction: column; gap: var(--s-32); }
             .stat-divider { width: var(--s-48); height: 1px; }
             .voice-masonry { columns: 1; }
         }
 
         @media (max-width: 480px) {
-            .waitlist-form { flex-direction: column; border-radius: var(--s-16); }
+            .waitlist-form { flex-direction: column; border-radius: var(--radius-md); }
             .waitlist-form input { text-align: center; border-bottom: 1px solid rgba(44,36,24,0.04); }
-            .waitlist-form button { padding: var(--s-16); }
-            .feature-row { grid-template-columns: 1fr; gap: var(--s-8); }
-            .feature-num { margin-bottom: var(--s-4); }
-            .feature-desc { grid-column: 1; }
+            .waitlist-form button { padding: var(--s-16); border-radius: 0 0 var(--radius-md) var(--radius-md); }
+            .quote-inner { padding: var(--s-32) var(--s-24); }
+            .problem-item { grid-template-columns: 1fr; }
+            .problem-item p { grid-column: 1; }
+            .problem-num { margin-bottom: var(--s-4); }
         }
     </style>
 </head>
@@ -538,7 +589,6 @@
         </div>
     </section>
 
-    <div class="divider-line"></div>
     <section class="quote-section">
         <div class="quote-inner reveal">
             <blockquote>"You become a memory, then not even that."</blockquote>
@@ -627,60 +677,46 @@
     <section class="solution">
         <div class="solution-inner">
             <div class="solution-header reveal">
-                <div>
-                    <p class="section-eyebrow" style="color: var(--terracotta);">How Jia helps</p>
-                    <h2>Not a chat app.<br>A place to <em>come home to.</em></h2>
-                </div>
+                <p class="section-eyebrow" style="color: var(--terracotta);">How Jia helps</p>
+                <h2>Not a chat app.<br>A place to <em>come home to.</em></h2>
                 <p class="solution-lede">A private space designed for warmth — where watching counts as participating, and a small hello is always enough.</p>
             </div>
-            <div class="feature-editorial">
-                <div class="feature-row reveal">
+            <div class="feature-grid">
+                <div class="feature-card reveal">
                     <span class="feature-num">01</span>
-                    <div><div class="feature-title">Postcards</div></div>
-                    <div>
-                        <p class="feature-desc">Share a photo, voice note, or short video. No caption required. No pressure to be interesting. Just a small window into your day.</p>
-                        <span class="feature-tag">Low effort · High warmth</span>
-                    </div>
+                    <div class="feature-title">Postcards</div>
+                    <p class="feature-desc">Share a photo, voice note, or short video. No caption required. No pressure to be interesting. Just a small window into your day.</p>
+                    <span class="feature-tag">Low effort · High warmth</span>
                 </div>
-                <div class="feature-row reveal reveal-d1">
+                <div class="feature-card reveal reveal-d1">
                     <span class="feature-num">02</span>
-                    <div><div class="feature-title">Weekly Recaps</div></div>
-                    <div>
-                        <p class="feature-desc">Every week, Jia gathers your family's moments into one view. Check in once, never miss a thing. The weekly heartbeat of your family.</p>
-                        <span class="feature-tag">Weekly ritual</span>
-                    </div>
+                    <div class="feature-title">Weekly Recaps</div>
+                    <p class="feature-desc">Every week, Jia gathers your family's moments into one view. Check in once, never miss a thing. The weekly heartbeat of your family.</p>
+                    <span class="feature-tag">Weekly ritual</span>
                 </div>
-                <div class="feature-row reveal reveal-d1">
+                <div class="feature-card reveal reveal-d1">
                     <span class="feature-num">03</span>
-                    <div><div class="feature-title">Overlap Finder</div></div>
-                    <div>
-                        <p class="feature-desc">Tell Jia when you're free. It finds the windows when everyone's awake and available — so those calls actually happen.</p>
-                        <span class="feature-tag">Time zone aware</span>
-                    </div>
+                    <div class="feature-title">Overlap Finder</div>
+                    <p class="feature-desc">Tell Jia when you're free. It finds the windows when everyone's awake and available — so those calls actually happen.</p>
+                    <span class="feature-tag">Time zone aware</span>
                 </div>
-                <div class="feature-row reveal reveal-d2">
+                <div class="feature-card reveal reveal-d2">
                     <span class="feature-num">04</span>
-                    <div><div class="feature-title">Watch-only Mode</div></div>
-                    <div>
-                        <p class="feature-desc">Parents and grandparents can browse and react without creating anything. Feeling included doesn't require content creation.</p>
-                        <span class="feature-tag">Designed for parents</span>
-                    </div>
+                    <div class="feature-title">Watch-only Mode</div>
+                    <p class="feature-desc">Parents and grandparents can browse and react without creating anything. Feeling included doesn't require content creation.</p>
+                    <span class="feature-tag">Designed for parents</span>
                 </div>
-                <div class="feature-row reveal reveal-d2">
+                <div class="feature-card reveal reveal-d2">
                     <span class="feature-num">05</span>
-                    <div><div class="feature-title">Family Nights</div></div>
-                    <div>
-                        <p class="feature-desc">Schedule dinner or movie night across time zones. Share your plate. Rate the film. Small rituals that build closeness over time.</p>
-                        <span class="feature-tag">Shared experiences</span>
-                    </div>
+                    <div class="feature-title">Family Nights</div>
+                    <p class="feature-desc">Schedule dinner or movie night across time zones. Share your plate. Rate the film. Small rituals that build closeness over time.</p>
+                    <span class="feature-tag">Shared experiences</span>
                 </div>
-                <div class="feature-row reveal reveal-d3">
+                <div class="feature-card reveal reveal-d3">
                     <span class="feature-num">06</span>
-                    <div><div class="feature-title">Gentle Prompts</div></div>
-                    <div>
-                        <p class="feature-desc">"Spot something red this week." Fun, concrete prompts that give everyone something easy to share — never homework, never guilt.</p>
-                        <span class="feature-tag">No pressure</span>
-                    </div>
+                    <div class="feature-title">Gentle Prompts</div>
+                    <p class="feature-desc">"Spot something red this week." Fun, concrete prompts that give everyone something easy to share — never homework, never guilt.</p>
+                    <span class="feature-tag">No pressure</span>
                 </div>
             </div>
         </div>
@@ -711,13 +747,167 @@
 
     <script>
     // ==========================================
-    // CLOUD CANVAS — elliptical radial gradient clusters
+    // REALISTIC CLOUD CANVAS
     // ==========================================
     (function() {
         var canvas = document.getElementById('cloud-canvas');
         if (!canvas) return;
         var ctx = canvas.getContext('2d');
         var W, H, dpr;
+
+        // Seeded RNG
+        function makeSrand(seed) {
+            var s = seed;
+            return function() {
+                s = (s * 16807 + 0) % 2147483647;
+                return (s - 1) / 2147483646;
+            };
+        }
+
+        // Generate cumulus-shaped puff layout
+        function generatePuffs(w, h, seed) {
+            var rng = makeSrand(seed);
+            var puffs = [];
+
+            // Bottom row — flat base
+            var baseY = h * 0.66;
+            var numBase = 4 + Math.floor(rng() * 3);
+            for (var i = 0; i < numBase; i++) {
+                var t = numBase > 1 ? i / (numBase - 1) : 0.5;
+                puffs.push({
+                    x: w * 0.06 + t * w * 0.88,
+                    y: baseY + (rng() - 0.5) * h * 0.06,
+                    r: w * 0.1 + rng() * w * 0.05
+                });
+            }
+
+            // Middle row — larger, overlapping puffs
+            var midY = h * 0.46;
+            var numMid = 3 + Math.floor(rng() * 2);
+            for (var i = 0; i < numMid; i++) {
+                var t = numMid > 1 ? i / (numMid - 1) : 0.5;
+                puffs.push({
+                    x: w * 0.16 + t * w * 0.68,
+                    y: midY + (rng() - 0.5) * h * 0.08,
+                    r: w * 0.12 + rng() * w * 0.06
+                });
+            }
+
+            // Top bumps — characteristic cumulus peaks
+            puffs.push({
+                x: w * (0.32 + rng() * 0.14),
+                y: h * 0.27 + rng() * h * 0.06,
+                r: w * 0.11 + rng() * w * 0.05
+            });
+            puffs.push({
+                x: w * (0.52 + rng() * 0.14),
+                y: h * 0.24 + rng() * h * 0.06,
+                r: w * 0.1 + rng() * w * 0.04
+            });
+            if (rng() > 0.3) {
+                puffs.push({
+                    x: w * (0.4 + rng() * 0.1),
+                    y: h * 0.19 + rng() * h * 0.04,
+                    r: w * 0.08 + rng() * w * 0.03
+                });
+            }
+
+            return puffs;
+        }
+
+        // Pre-render a single cloud to an offscreen canvas
+        function preRenderCloud(w, h, seed) {
+            var pad = 20;
+            var puffs = generatePuffs(w, h, seed);
+
+            // Pass 1: solid puffs
+            var oc1 = document.createElement('canvas');
+            oc1.width = w + pad * 2;
+            oc1.height = h + pad * 2;
+            var c1 = oc1.getContext('2d');
+            c1.translate(pad, pad);
+
+            // Shadow layer (subtle blue-gray beneath)
+            c1.fillStyle = 'rgba(140,155,170,0.09)';
+            for (var i = 0; i < puffs.length; i++) {
+                c1.beginPath();
+                c1.arc(puffs[i].x, puffs[i].y + 5, puffs[i].r * 0.92, 0, Math.PI * 2);
+                c1.fill();
+            }
+
+            // Main cloud body (warm white)
+            c1.fillStyle = 'rgba(255,253,248,0.97)';
+            for (var i = 0; i < puffs.length; i++) {
+                c1.beginPath();
+                c1.arc(puffs[i].x, puffs[i].y, puffs[i].r, 0, Math.PI * 2);
+                c1.fill();
+            }
+
+            // Highlight on top puffs
+            c1.fillStyle = 'rgba(255,255,255,0.5)';
+            for (var i = 0; i < puffs.length; i++) {
+                if (puffs[i].y < h * 0.4) {
+                    c1.beginPath();
+                    c1.arc(puffs[i].x, puffs[i].y - puffs[i].r * 0.15, puffs[i].r * 0.7, 0, Math.PI * 2);
+                    c1.fill();
+                }
+            }
+
+            // Pass 2: soften edges with blur
+            var oc2 = document.createElement('canvas');
+            oc2.width = oc1.width;
+            oc2.height = oc1.height;
+            var c2 = oc2.getContext('2d');
+            try {
+                c2.filter = 'blur(3px)';
+            } catch(e) {}
+            c2.drawImage(oc1, 0, 0);
+
+            return { canvas: oc2, pad: pad };
+        }
+
+        // Cloud definitions: position, size, speed, opacity
+        var cloudDefs = [
+            // Far layer — large, slow, translucent
+            { xFrac: 0.02,  yFrac: 0.06,  w: 340, h: 130, speed: 3,    alpha: 0.45, seed: 101 },
+            { xFrac: 0.5,   yFrac: 0.10,  w: 420, h: 150, speed: 2.5,  alpha: 0.4,  seed: 202 },
+            { xFrac: 0.28,  yFrac: 0.22,  w: 380, h: 140, speed: 3.5,  alpha: 0.38, seed: 303 },
+
+            // Mid layer — moderate
+            { xFrac: 0.08,  yFrac: 0.04,  w: 260, h: 105, speed: 7,    alpha: 0.65, seed: 404 },
+            { xFrac: 0.48,  yFrac: 0.16,  w: 290, h: 110, speed: 6,    alpha: 0.6,  seed: 505 },
+            { xFrac: 0.75,  yFrac: 0.24,  w: 240, h: 95,  speed: 8,    alpha: 0.55, seed: 606 },
+            { xFrac: 0.18,  yFrac: 0.34,  w: 270, h: 100, speed: 5.5,  alpha: 0.5,  seed: 707 },
+
+            // Near layer — smaller, faster, more opaque
+            { xFrac: 0.38,  yFrac: 0.02,  w: 190, h: 78,  speed: 13,   alpha: 0.82, seed: 808 },
+            { xFrac: 0.82,  yFrac: 0.18,  w: 170, h: 70,  speed: 11,   alpha: 0.75, seed: 909 },
+
+            // Horizon haze — wide, very slow
+            { xFrac: -0.05, yFrac: 0.48,  w: 520, h: 170, speed: 1.5,  alpha: 0.28, seed: 111 },
+            { xFrac: 0.35,  yFrac: 0.53,  w: 480, h: 155, speed: 1.2,  alpha: 0.22, seed: 222 },
+        ];
+
+        var clouds = [];
+
+        function initClouds() {
+            clouds = [];
+            for (var i = 0; i < cloudDefs.length; i++) {
+                var d = cloudDefs[i];
+                var rendered = preRenderCloud(d.w, d.h, d.seed);
+                clouds.push({
+                    bitmap: rendered.canvas,
+                    pad: rendered.pad,
+                    xFrac: d.xFrac,
+                    yFrac: d.yFrac,
+                    w: d.w,
+                    h: d.h,
+                    speed: d.speed,
+                    alpha: d.alpha,
+                    phase: d.seed * 0.037
+                });
+            }
+        }
 
         function resize() {
             var hero = canvas.parentElement;
@@ -731,102 +921,33 @@
             ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
         }
 
-        // Seeded random for consistent cloud shapes
-        function seededRandom(seed) {
-            var x = Math.sin(seed) * 43758.5453;
-            return x - Math.floor(x);
-        }
-
-        // Build cloud puffs (pre-computed, not random each frame)
-        function makePuffs(count, seed) {
-            var puffs = [];
-            for (var i = 0; i < count; i++) {
-                var s = seed * 100 + i * 7.3;
-                puffs.push({
-                    ox: (seededRandom(s + 1) - 0.5) * 0.8,
-                    oy: (seededRandom(s + 2) - 0.5) * 0.4,
-                    rx: 0.18 + seededRandom(s + 3) * 0.32,
-                    ry: 0.15 + seededRandom(s + 4) * 0.18,
-                    a:  0.25 + seededRandom(s + 5) * 0.45
-                });
-            }
-            return puffs;
-        }
-
-        // Cloud data
-        var clouds = [
-            // BACK — large, slow, soft
-            { xFrac: 0.0,  yFrac: 0.08,  w: 650, h: 170, speed: 4,  baseAlpha: 0.22, puffs: makePuffs(8, 1), phase: 0 },
-            { xFrac: 0.55, yFrac: 0.12,  w: 550, h: 150, speed: 3.5,baseAlpha: 0.20, puffs: makePuffs(7, 2), phase: 1.2 },
-            { xFrac: 0.20, yFrac: 0.24,  w: 720, h: 190, speed: 3,  baseAlpha: 0.18, puffs: makePuffs(9, 3), phase: 2.5 },
-            { xFrac: 0.70, yFrac: 0.28,  w: 450, h: 130, speed: 4.5,baseAlpha: 0.16, puffs: makePuffs(6, 4), phase: 3.8 },
-
-            // MID — medium, moderate drift
-            { xFrac: 0.08, yFrac: 0.06,  w: 420, h: 130, speed: 8,  baseAlpha: 0.35, puffs: makePuffs(6, 5), phase: 0.7 },
-            { xFrac: 0.48, yFrac: 0.16,  w: 380, h: 120, speed: 7,  baseAlpha: 0.32, puffs: makePuffs(6, 6), phase: 4.1 },
-            { xFrac: -0.08,yFrac: 0.22,  w: 460, h: 140, speed: 6.5,baseAlpha: 0.28, puffs: makePuffs(7, 7), phase: 1.9 },
-            { xFrac: 0.62, yFrac: 0.32,  w: 350, h: 110, speed: 7.5,baseAlpha: 0.25, puffs: makePuffs(5, 8), phase: 5.3 },
-            { xFrac: 0.32, yFrac: 0.38,  w: 300, h: 95,  speed: 9,  baseAlpha: 0.22, puffs: makePuffs(5, 9), phase: 2.8 },
-
-            // FRONT — small, faster, more opaque
-            { xFrac: 0.38, yFrac: 0.04,  w: 260, h: 80,  speed: 14, baseAlpha: 0.42, puffs: makePuffs(4, 10), phase: 0.3 },
-            { xFrac: 0.78, yFrac: 0.19,  w: 230, h: 75,  speed: 12, baseAlpha: 0.38, puffs: makePuffs(4, 11), phase: 3.6 },
-            { xFrac: -0.03,yFrac: 0.15,  w: 290, h: 85,  speed: 11, baseAlpha: 0.33, puffs: makePuffs(5, 12), phase: 5.9 },
-
-            // HORIZON haze — very wide, slow
-            { xFrac: -0.15,yFrac: 0.50,  w: 1000, h: 220, speed: 2,  baseAlpha: 0.14, puffs: makePuffs(12, 13), phase: 1.5 },
-            { xFrac: 0.25, yFrac: 0.56,  w: 900,  h: 200, speed: 1.8,baseAlpha: 0.12, puffs: makePuffs(10, 14), phase: 4.7 },
-        ];
-
         var startTime = performance.now();
         var animId;
 
-        function drawCloud(cloud, time) {
-            var t = time * 0.001; // seconds
-            // Drift: sinusoidal + slow linear
-            var drift = Math.sin(t * 0.15 * (cloud.speed * 0.1) + cloud.phase) * (cloud.w * 0.2);
-            var linearCreep = Math.sin(t * 0.03 * cloud.speed + cloud.phase * 2) * (cloud.w * 0.35);
-            var cx = cloud.xFrac * W + drift + linearCreep;
-            var cy = cloud.yFrac * H + Math.sin(t * 0.1 + cloud.phase) * 6;
-
-            for (var i = 0; i < cloud.puffs.length; i++) {
-                var p = cloud.puffs[i];
-                var px = cx + p.ox * cloud.w;
-                var py = cy + p.oy * cloud.h;
-                var rx = p.rx * cloud.w;
-                var ry = p.ry * cloud.h;
-                var alpha = p.a * cloud.baseAlpha;
-
-                if (alpha < 0.005) continue;
-                if (px + rx < -100 || px - rx > W + 100) continue;
-                if (py + ry < -100 || py - ry > H + 100) continue;
-
-                var maxR = Math.max(rx, ry);
-                var grad = ctx.createRadialGradient(px, py, 0, px, py, maxR);
-                grad.addColorStop(0, 'rgba(255,255,255,' + alpha + ')');
-                grad.addColorStop(0.3, 'rgba(255,255,255,' + (alpha * 0.65) + ')');
-                grad.addColorStop(0.6, 'rgba(255,255,255,' + (alpha * 0.25) + ')');
-                grad.addColorStop(1, 'rgba(255,255,255,0)');
-
-                ctx.fillStyle = grad;
-                ctx.beginPath();
-                ctx.ellipse(px, py, rx, ry, 0, 0, Math.PI * 2);
-                ctx.fill();
-            }
-        }
-
         function render(now) {
-            var time = now - startTime;
+            var t = (now - startTime) * 0.001;
             ctx.clearRect(0, 0, W, H);
 
             for (var i = 0; i < clouds.length; i++) {
-                drawCloud(clouds[i], time);
+                var c = clouds[i];
+                // Gentle sinusoidal drift + slow linear creep
+                var sinDrift = Math.sin(t * 0.08 + c.phase) * 25;
+                var linearDrift = t * c.speed;
+                var totalW = W + c.w * 2;
+                var baseX = c.xFrac * W;
+                var x = ((baseX + c.w + linearDrift + sinDrift) % totalW + totalW) % totalW - c.w;
+                var y = c.yFrac * H + Math.sin(t * 0.12 + c.phase) * 4;
+
+                ctx.globalAlpha = c.alpha;
+                ctx.drawImage(c.bitmap, x - c.pad, y - c.pad);
             }
+            ctx.globalAlpha = 1;
 
             animId = requestAnimationFrame(render);
         }
 
         resize();
+        initClouds();
         animId = requestAnimationFrame(render);
 
         var resizeTimer;
@@ -839,6 +960,7 @@
             if (document.hidden) {
                 cancelAnimationFrame(animId);
             } else {
+                startTime = performance.now() - (performance.now() - startTime);
                 animId = requestAnimationFrame(render);
             }
         });
