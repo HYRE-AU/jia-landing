@@ -10,7 +10,7 @@
     <meta property="og:type" content="website">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=Poppins:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
 
     <style>
         :root {
@@ -35,8 +35,8 @@
             --parchment: #ede5d8;
             --sand: #d8c4ac;
 
-            --font-display: 'Fraunces', Georgia, serif;
-            --font-body: 'Outfit', system-ui, sans-serif;
+            --font-display: 'Old Standard TT', Georgia, serif;
+            --font-body: 'Poppins', system-ui, sans-serif;
 
             --section-x: clamp(20px, 5vw, 40px);
             --section-y: clamp(80px, 10vw, 120px);
@@ -115,15 +115,13 @@
         }
 
         .hero-wordmark {
-            font-family: var(--font-display);
-            font-size: 0.85rem;
-            font-weight: 400;
-            letter-spacing: 0.35em;
-            text-transform: uppercase;
-            color: var(--warm-dark);
             margin-bottom: var(--s-40);
             opacity: 0;
             animation: rise 1.4s cubic-bezier(0.19, 1, 0.22, 1) 0.15s forwards;
+        }
+        .hero-wordmark img {
+            height: 48px;
+            width: auto;
         }
 
         .hero h1 {
@@ -163,25 +161,27 @@
         /* ===================== FORM ===================== */
         .waitlist-form {
             display: flex;
-            align-items: stretch;
-            max-width: 400px;
-            border: 1.5px solid rgba(44, 36, 24, 0.08);
+            align-items: center;
+            max-width: 340px;
+            border: 1px solid rgba(44, 36, 24, 0.06);
             border-radius: var(--radius-pill);
-            background: rgba(255, 255, 255, 0.6);
+            background: rgba(255, 255, 255, 0.55);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             overflow: hidden;
             transition: border-color 0.3s, box-shadow 0.3s;
-            box-shadow: 0 4px 24px rgba(139, 115, 85, 0.08);
+            box-shadow: 0 2px 16px rgba(139, 115, 85, 0.06);
+            padding: 4px;
+            margin: 0 auto;
         }
         .waitlist-form:focus-within {
-            border-color: var(--terracotta);
-            box-shadow: 0 4px 24px rgba(196, 112, 75, 0.12);
+            border-color: rgba(196, 112, 75, 0.25);
+            box-shadow: 0 2px 20px rgba(196, 112, 75, 0.08);
         }
         .waitlist-form input {
             font-family: var(--font-body);
-            font-size: 0.92rem;
-            padding: var(--s-16) var(--s-24);
+            font-size: 0.82rem;
+            padding: var(--s-8) var(--s-16);
             border: none;
             background: transparent;
             flex: 1;
@@ -190,23 +190,23 @@
             min-width: 0;
             font-weight: 300;
         }
-        .waitlist-form input::placeholder { color: var(--warm-gray-light); }
+        .waitlist-form input::placeholder { color: var(--warm-gray-light); font-size: 0.82rem; }
         .waitlist-form button {
             font-family: var(--font-body);
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             font-weight: 500;
-            padding: var(--s-16) var(--s-24);
+            padding: var(--s-8) var(--s-16);
             background: var(--terracotta);
             color: white;
             border: none;
             cursor: pointer;
-            transition: background 0.25s;
+            transition: background 0.3s, transform 0.2s;
             white-space: nowrap;
-            letter-spacing: 0.03em;
-            border-radius: 0 var(--radius-pill) var(--radius-pill) 0;
+            letter-spacing: 0.04em;
+            border-radius: var(--radius-pill);
         }
-        .waitlist-form button:hover { background: var(--terracotta-deep); }
-        .waitlist-form button:disabled { opacity: 0.5; cursor: not-allowed; }
+        .waitlist-form button:hover { background: var(--terracotta-deep); transform: scale(1.02); }
+        .waitlist-form button:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
         .form-note {
             margin-top: var(--s-12);
             font-size: 0.75rem;
@@ -338,6 +338,66 @@
         }
         .problem-item p { font-size: 0.88rem; color: var(--warm-gray-mid); line-height: 1.65; font-weight: 300; grid-column: 2; }
 
+        /* ===================== RESEARCH ===================== */
+        .research { background: var(--muslin); padding: var(--section-y) var(--section-x); }
+        .research-inner { max-width: var(--content-max); margin: 0 auto; }
+        .research-header {
+            max-width: 600px;
+            margin-bottom: var(--s-64);
+        }
+        .research h2 {
+            font-family: var(--font-display);
+            font-size: clamp(1.7rem, 3.2vw, 2.4rem);
+            color: var(--warm-black);
+            font-weight: 400;
+            line-height: 1.25;
+            margin-bottom: var(--s-16);
+        }
+        .research-lede {
+            font-size: 0.95rem;
+            color: var(--warm-gray);
+            line-height: 1.75;
+            font-weight: 300;
+        }
+        .research-findings {
+            display: flex;
+            flex-direction: column;
+            gap: var(--s-24);
+        }
+        .finding-card {
+            background: var(--cream);
+            border-radius: var(--radius-lg);
+            padding: var(--s-32) var(--s-40);
+            box-shadow: 0 2px 12px rgba(139, 115, 85, 0.04);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+        .finding-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 36px rgba(139, 115, 85, 0.09);
+        }
+        .finding-card h3 {
+            font-family: var(--font-display);
+            font-size: 1.15rem;
+            color: var(--warm-black);
+            font-weight: 400;
+            margin-bottom: var(--s-12);
+            line-height: 1.35;
+        }
+        .finding-card p {
+            font-size: 0.9rem;
+            color: var(--warm-gray);
+            line-height: 1.7;
+            font-weight: 300;
+            margin-bottom: var(--s-12);
+        }
+        .finding-source {
+            font-size: 0.72rem;
+            color: var(--warm-gray-light);
+            font-weight: 400;
+            letter-spacing: 0.03em;
+        }
+        .finding-source strong { color: var(--terracotta); font-weight: 500; }
+
         /* ===================== STATS ===================== */
         .stats {
             background: linear-gradient(135deg, #c87a56 0%, var(--terracotta) 50%, var(--terracotta-deep) 100%);
@@ -358,7 +418,7 @@
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: start;
             gap: var(--s-32);
             position: relative;
         }
@@ -371,58 +431,15 @@
             line-height: 1;
             margin-bottom: var(--s-8);
         }
-        .stat p { font-size: 0.8rem; color: rgba(255,255,255,0.75); line-height: 1.55; font-weight: 300; max-width: 180px; margin: 0 auto; }
-        .stat-divider { width: 1px; height: var(--s-48); background: rgba(255,255,255,0.15); flex-shrink: 0; border-radius: 1px; }
-
-        /* ===================== VOICES ===================== */
-        .voices { background: var(--muslin); padding: var(--section-y) var(--section-x); }
-        .voices-inner { max-width: var(--content-max); margin: 0 auto; }
-        .voices-header { margin-bottom: var(--s-64); }
-        .voices h2 {
+        .stat-label {
             font-family: var(--font-display);
-            font-size: clamp(1.5rem, 3.2vw, 2.2rem);
-            color: var(--warm-black);
+            font-size: 0.85rem;
+            color: white;
             font-weight: 400;
-            line-height: 1.3;
-            max-width: 340px;
+            margin-bottom: var(--s-4);
         }
-        .voice-masonry { columns: 2; column-gap: var(--s-24); }
-        .voice-card {
-            break-inside: avoid;
-            margin-bottom: var(--s-24);
-            background: var(--cream);
-            padding: var(--s-32);
-            border-radius: var(--radius-md);
-            box-shadow: 0 2px 16px rgba(139, 115, 85, 0.05);
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        .voice-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: var(--terracotta);
-            border-radius: var(--radius-md) var(--radius-md) 0 0;
-        }
-        .voice-card:nth-child(2)::before { background: var(--chambray); }
-        .voice-card:nth-child(3)::before { background: var(--clay); }
-        .voice-card:nth-child(4)::before { background: var(--terracotta-glow); }
-        .voice-card:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(139, 115, 85, 0.1); }
-        .voice-card blockquote {
-            font-family: var(--font-display);
-            font-style: italic;
-            font-size: 0.98rem;
-            line-height: 1.6;
-            color: var(--warm-black);
-            font-weight: 300;
-            margin-bottom: var(--s-16);
-        }
-        .voice-source { font-size: 0.72rem; color: var(--warm-gray-light); font-weight: 400; letter-spacing: 0.04em; }
-        .voice-source .votes { color: var(--terracotta); font-weight: 500; }
+        .stat p { font-size: 0.78rem; color: rgba(255,255,255,0.7); line-height: 1.55; font-weight: 300; max-width: 220px; margin: 0 auto; }
+        .stat-divider { width: 1px; height: var(--s-64); background: rgba(255,255,255,0.15); flex-shrink: 0; border-radius: 1px; margin-top: var(--s-8); }
 
         /* ===================== SOLUTION ===================== */
         .solution { background: var(--cream); padding: var(--section-y) var(--section-x); }
@@ -502,6 +519,34 @@
             background: rgba(196,112,75,0.04);
         }
 
+        /* ===================== LETTER ===================== */
+        .letter { background: var(--cream); padding: var(--section-y) var(--section-x); }
+        .letter-inner { max-width: 600px; margin: 0 auto; }
+        .letter h2 {
+            font-family: var(--font-display);
+            font-size: clamp(1.7rem, 3.2vw, 2.4rem);
+            color: var(--warm-black);
+            font-weight: 400;
+            line-height: 1.25;
+            margin-bottom: var(--s-40);
+        }
+        .letter h2 em { font-style: italic; color: var(--terracotta); }
+        .letter p {
+            font-size: 0.95rem;
+            color: var(--warm-gray);
+            line-height: 1.8;
+            font-weight: 300;
+            margin-bottom: var(--s-24);
+        }
+        .letter-sig {
+            font-family: var(--font-display);
+            font-style: italic;
+            font-size: 1rem;
+            color: var(--terracotta);
+            font-weight: 400;
+            margin-top: var(--s-16);
+        }
+
         /* ===================== CTA ===================== */
         .cta {
             padding: var(--section-y) var(--section-x) 160px;
@@ -544,21 +589,74 @@
             .hero-content { padding: 0 var(--s-24); }
             .waitlist-form { margin: 0 auto; }
             .problem-inner { grid-template-columns: 1fr; gap: var(--s-48); }
-            .problem-text { position: static; }
+            .problem-text { position: static; text-align: center; }
+            .problem-lede { max-width: 480px; margin: 0 auto; }
             .feature-grid { grid-template-columns: 1fr; }
-            .stats-inner { flex-direction: column; gap: var(--s-32); }
-            .stat-divider { width: var(--s-48); height: 1px; }
-            .voice-masonry { columns: 1; }
+            .stats { padding: var(--s-48) var(--section-x); }
+            .stats-inner { flex-direction: column; gap: var(--s-32); align-items: center; }
+            .stat { width: 100%; max-width: 400px; }
+            .stat p { max-width: 320px; }
+            .stat-divider { width: var(--s-48); height: 1px; margin: 0 auto; }
+            .finding-card { padding: var(--s-24); }
+            .research-header { text-align: center; margin-left: auto; margin-right: auto; }
+            .letter-inner { text-align: center; }
+            .voices-header { text-align: center; }
         }
 
         @media (max-width: 480px) {
-            .waitlist-form { flex-direction: column; border-radius: var(--radius-md); }
-            .waitlist-form input { text-align: center; border-bottom: 1px solid rgba(44,36,24,0.04); }
-            .waitlist-form button { padding: var(--s-16); border-radius: 0 0 var(--radius-md) var(--radius-md); }
+            /* Hero */
+            .hero h1 { font-size: clamp(2rem, 8vw, 2.6rem); }
+            .hero-sub { font-size: 0.88rem; }
+            .hero-wordmark img { height: 36px; }
+
+            /* Form */
+            .waitlist-form { flex-direction: column; border-radius: var(--radius-md); padding: var(--s-4); max-width: 280px; }
+            .waitlist-form input { text-align: center; padding: var(--s-8) var(--s-12); font-size: 0.8rem; }
+            .waitlist-form input::placeholder { font-size: 0.8rem; }
+            .waitlist-form button { padding: var(--s-8); border-radius: var(--radius-sm); width: 100%; font-size: 0.72rem; }
+            .form-note { font-size: 0.68rem; }
+
+            /* Quote */
+            .quote-section { padding: var(--s-64) var(--section-x); }
             .quote-inner { padding: var(--s-32) var(--s-24); }
-            .problem-item { grid-template-columns: 1fr; }
+            .quote-inner::before { font-size: 3.5rem; left: var(--s-16); }
+
+            /* Problem */
+            .problem-item { grid-template-columns: 1fr; padding: var(--s-16) var(--s-24); }
             .problem-item p { grid-column: 1; }
-            .problem-num { margin-bottom: var(--s-4); }
+            .problem-num { font-size: 1.4rem; margin-bottom: var(--s-4); }
+            .problem-item h3 { font-size: 0.95rem; }
+            .problem-item p { font-size: 0.82rem; }
+
+            /* Research */
+            .research-header { margin-bottom: var(--s-40); }
+            .finding-card { padding: var(--s-16) var(--s-24); }
+            .finding-card h3 { font-size: 1rem; }
+            .finding-card p { font-size: 0.84rem; }
+
+            /* Stats */
+            .stats { padding: var(--s-40) var(--section-x); }
+            .stats-inner { gap: var(--s-24); }
+            .stat-num { font-size: clamp(1.6rem, 8vw, 2rem); }
+            .stat-label { font-size: 0.78rem; }
+            .stat p { font-size: 0.72rem; max-width: 260px; }
+
+            /* Features */
+            .feature-card { padding: var(--s-24); }
+            .feature-title { font-size: 1.1rem; }
+            .feature-desc { font-size: 0.84rem; }
+
+            /* Letter */
+            .letter p { font-size: 0.88rem; }
+            .letter h2 { margin-bottom: var(--s-32); }
+
+            /* CTA */
+            .cta { padding: var(--s-80) var(--section-x) var(--s-120); }
+            .cta h2 { font-size: clamp(1.5rem, 6vw, 1.9rem); }
+            .cta-sub { font-size: 0.88rem; }
+
+            /* Section spacing */
+            .section-eyebrow { font-size: 0.62rem; }
         }
     </style>
 </head>
@@ -570,7 +668,7 @@
         <canvas class="hero-cloud-canvas" id="cloud-canvas"></canvas>
 
         <div class="hero-content">
-            <p class="hero-wordmark">Jia</p>
+            <div class="hero-wordmark"><img src="logo.png" alt="Jia"></div>
             <h1>Feel close,<br>even when<br>you're <em>far away</em></h1>
             <p class="hero-sub">A private digital home for families across time zones. No group chat chaos. No posting pressure. Just warmth.</p>
             <div class="hero-form-wrap">
@@ -628,48 +726,61 @@
         </div>
     </section>
 
-    <section class="stats">
-        <div class="stats-inner">
-            <div class="stat reveal">
-                <div class="stat-num">304M</div>
-                <p>International migrants — each one a family divided by distance</p>
+    <section class="research">
+        <div class="research-inner">
+            <div class="research-header reveal">
+                <p class="section-eyebrow" style="color: var(--clay);">What We Found</p>
+                <h2>We spent months listening to families.</h2>
+                <p class="research-lede">Reddit. Twitter. App Store reviews. Academic journals. We went looking for the truth about what happens to family relationships when distance becomes the default.</p>
             </div>
-            <div class="stat-divider"></div>
-            <div class="stat reveal reveal-d1">
-                <div class="stat-num">4 in 10</div>
-                <p>Adults over 45 report loneliness — children moving away is a key trigger</p>
-            </div>
-            <div class="stat-divider"></div>
-            <div class="stat reveal reveal-d2">
-                <div class="stat-num">0</div>
-                <p>Purpose-built family connection apps mentioned organically by expats</p>
+            <div class="research-findings">
+                <div class="finding-card reveal reveal-d1">
+                    <h3>Parents' tech calls are actually loneliness calls</h3>
+                    <p>When mum calls about a popup on her laptop, she doesn't need IT help. She needs to hear your voice. Every small tech problem becomes a legitimate reason to reach out — because there's no other easy, low-pressure way to say "I miss you."</p>
+                    <span class="finding-source">r/AgingParents · <strong>114 upvotes</strong></span>
+                </div>
+                <div class="finding-card reveal reveal-d1">
+                    <h3>Having kids makes the distance unbearable</h3>
+                    <p>Moving abroad was manageable before children. But once you're a parent, the weight of your own parents not being there — not seeing first steps, not being part of the village — becomes something you carry every single day.</p>
+                    <span class="finding-source">r/expats · <strong>214 upvotes</strong></span>
+                </div>
+                <div class="finding-card reveal reveal-d2">
+                    <h3>WhatsApp becomes toxic when it matters most</h3>
+                    <p>When aging parents need care, family group chats turn into guilt trips and blame games. Siblings weaponize distance. The tool designed for communication becomes the source of family conflict at the worst possible time.</p>
+                    <span class="finding-source">Leaked family chat · r/Bolehland · <strong>1,050 upvotes</strong></span>
+                </div>
+                <div class="finding-card reveal reveal-d2">
+                    <h3>People move entire countries to feel close again</h3>
+                    <p>Expats earning more abroad choose to uproot everything — careers, relationships, entire lives — and move back. Because no app, no video call, no group chat was enough to make the distance feel okay. That's the scale of the problem.</p>
+                    <span class="finding-source">Pattern across r/expats, r/AmerExit, r/dubai</span>
+                </div>
+                <div class="finding-card reveal reveal-d3">
+                    <h3>Existing apps are failing on the thing that matters most</h3>
+                    <p>We analyzed thousands of App Store reviews for family apps. The #1 complaint: no time zone awareness. Followed closely by: too complicated for parents, feels like just another social media app, and no way to participate without posting content.</p>
+                    <span class="finding-source">App Store review analysis · Jia Research, 2026</span>
+                </div>
             </div>
         </div>
     </section>
 
-    <section class="voices">
-        <div class="voices-inner">
-            <div class="voices-header reveal">
-                <p class="section-eyebrow" style="color: var(--clay);">Real families</p>
-                <h2>Words we found that could have been yours</h2>
+    <section class="stats">
+        <div class="stats-inner">
+            <div class="stat reveal">
+                <div class="stat-num">73%</div>
+                <div class="stat-label">Communication breakdowns</div>
+                <p>Of transnational families report communication breakdowns within 6 months</p>
             </div>
-            <div class="voice-masonry">
-                <div class="voice-card reveal">
-                    <blockquote>"I cannot bear the thought of when my parents are no longer in good health and I am all the way over here."</blockquote>
-                    <p class="voice-source">r/expats</p>
-                </div>
-                <div class="voice-card reveal reveal-d1">
-                    <blockquote>"The tech problems are all cries for attention. Old people are very lonely, so every popup becomes a legitimate reason to call."</blockquote>
-                    <p class="voice-source">r/AgingParents · <span class="votes">114 upvotes</span></p>
-                </div>
-                <div class="voice-card reveal reveal-d1">
-                    <blockquote>"That pang you get when you see your relatives once a year and they're noticeably older."</blockquote>
-                    <p class="voice-source">r/japanlife · <span class="votes">188 upvotes</span></p>
-                </div>
-                <div class="voice-card reveal reveal-d2">
-                    <blockquote>"I wish my parents could be a regular part of my kids' lives. This wasn't so hard before children."</blockquote>
-                    <p class="voice-source">r/expats · <span class="votes">214 upvotes</span></p>
-                </div>
+            <div class="stat-divider"></div>
+            <div class="stat reveal reveal-d1">
+                <div class="stat-num">2×</div>
+                <div class="stat-label">Migration has doubled</div>
+                <p>People living outside their birth country has nearly doubled since 1990 — and it's accelerating. UN DESA, 2024</p>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat reveal reveal-d2">
+                <div class="stat-num">40%</div>
+                <div class="stat-label">Parents are lonely</div>
+                <p>Adults aged 45+ report regular loneliness. "Children moving away" is one of the most cited triggers. WHO & AARP</p>
             </div>
         </div>
     </section>
@@ -722,6 +833,18 @@
         </div>
     </section>
 
+    <section class="letter">
+        <div class="letter-inner reveal">
+            <h2>We're building this because we've <em>lived it.</em></h2>
+            <p>If you've ever sat in a different time zone, staring at your phone, wondering if it's too late to call — this is for you.</p>
+            <p>If you've ever opened a family group chat to a wall of unread messages and felt too tired to catch up — this is for you.</p>
+            <p>If your parents have ever called about a "computer problem" that wasn't really about the computer — this is for you.</p>
+            <p>We built Jia because we believe families shouldn't need to choose between moving back and feeling close. Distance is the reality. But disconnection doesn't have to be.</p>
+            <p>We're not building another messaging app. We're building the feeling of being home — even when home is 10,000 kilometres away.</p>
+            <p class="letter-sig">— The Jia team</p>
+        </div>
+    </section>
+
     <section class="cta">
         <div class="cta-inner reveal">
             <h2>Your family deserves more than <em>a group chat</em></h2>
@@ -742,7 +865,7 @@
 
     <footer class="site-footer">
         <p class="footer-mark">Jia</p>
-        <p>Made with love for families far apart · <a href="mailto:hello@jia.app">hello@jia.app</a></p>
+        <p>Made with love for families far apart ·
     </footer>
 
     <script>
@@ -755,137 +878,141 @@
         var ctx = canvas.getContext('2d');
         var W, H, dpr;
 
-        // Seeded RNG
-        function makeSrand(seed) {
-            var s = seed;
-            return function() {
-                s = (s * 16807 + 0) % 2147483647;
-                return (s - 1) / 2147483646;
-            };
+        // --- Noise functions for procedural cloud textures ---
+        function fract(x) { return x - Math.floor(x); }
+
+        function noise(x, y) {
+            var ix = Math.floor(x), iy = Math.floor(y);
+            var fx = x - ix, fy = y - iy;
+            var ux = fx * fx * (3 - 2 * fx);
+            var uy = fy * fy * (3 - 2 * fy);
+            var a = fract(Math.sin(ix * 127.1 + iy * 311.7) * 43758.5453);
+            var b = fract(Math.sin((ix+1) * 127.1 + iy * 311.7) * 43758.5453);
+            var c = fract(Math.sin(ix * 127.1 + (iy+1) * 311.7) * 43758.5453);
+            var d = fract(Math.sin((ix+1) * 127.1 + (iy+1) * 311.7) * 43758.5453);
+            return a + (b-a)*ux + (c-a)*uy + (a-b-c+d)*ux*uy;
         }
 
-        // Generate cumulus-shaped puff layout
-        function generatePuffs(w, h, seed) {
-            var rng = makeSrand(seed);
-            var puffs = [];
-
-            // Bottom row — flat base
-            var baseY = h * 0.66;
-            var numBase = 4 + Math.floor(rng() * 3);
-            for (var i = 0; i < numBase; i++) {
-                var t = numBase > 1 ? i / (numBase - 1) : 0.5;
-                puffs.push({
-                    x: w * 0.06 + t * w * 0.88,
-                    y: baseY + (rng() - 0.5) * h * 0.06,
-                    r: w * 0.1 + rng() * w * 0.05
-                });
+        function fbm(x, y, oct) {
+            var v = 0, a = 0.5, f = 1;
+            for (var i = 0; i < oct; i++) {
+                v += a * noise(x * f, y * f);
+                f *= 2.0; a *= 0.5;
             }
-
-            // Middle row — larger, overlapping puffs
-            var midY = h * 0.46;
-            var numMid = 3 + Math.floor(rng() * 2);
-            for (var i = 0; i < numMid; i++) {
-                var t = numMid > 1 ? i / (numMid - 1) : 0.5;
-                puffs.push({
-                    x: w * 0.16 + t * w * 0.68,
-                    y: midY + (rng() - 0.5) * h * 0.08,
-                    r: w * 0.12 + rng() * w * 0.06
-                });
-            }
-
-            // Top bumps — characteristic cumulus peaks
-            puffs.push({
-                x: w * (0.32 + rng() * 0.14),
-                y: h * 0.27 + rng() * h * 0.06,
-                r: w * 0.11 + rng() * w * 0.05
-            });
-            puffs.push({
-                x: w * (0.52 + rng() * 0.14),
-                y: h * 0.24 + rng() * h * 0.06,
-                r: w * 0.1 + rng() * w * 0.04
-            });
-            if (rng() > 0.3) {
-                puffs.push({
-                    x: w * (0.4 + rng() * 0.1),
-                    y: h * 0.19 + rng() * h * 0.04,
-                    r: w * 0.08 + rng() * w * 0.03
-                });
-            }
-
-            return puffs;
+            return v;
         }
 
-        // Pre-render a single cloud to an offscreen canvas
-        function preRenderCloud(w, h, seed) {
-            var pad = 20;
-            var puffs = generatePuffs(w, h, seed);
+        // Generate a cloud texture using fractal noise
+        function generateCloudTexture(displayW, displayH, seed) {
+            var res = 0.45;
+            var w = Math.round(displayW * res);
+            var h = Math.round(displayH * res);
 
-            // Pass 1: solid puffs
-            var oc1 = document.createElement('canvas');
-            oc1.width = w + pad * 2;
-            oc1.height = h + pad * 2;
-            var c1 = oc1.getContext('2d');
-            c1.translate(pad, pad);
+            var oc = document.createElement('canvas');
+            oc.width = w; oc.height = h;
+            var octx = oc.getContext('2d');
+            var imgData = octx.createImageData(w, h);
+            var px = imgData.data;
 
-            // Shadow layer (subtle blue-gray beneath)
-            c1.fillStyle = 'rgba(140,155,170,0.09)';
-            for (var i = 0; i < puffs.length; i++) {
-                c1.beginPath();
-                c1.arc(puffs[i].x, puffs[i].y + 5, puffs[i].r * 0.92, 0, Math.PI * 2);
-                c1.fill();
-            }
+            var cx = w * 0.5, cy = h * 0.55;
+            var rx = w * 0.46, ry = h * 0.46;
+            var nScale = 3.5 + (seed % 5) * 0.4;
+            var ox = seed * 13.7, oy = seed * 7.3;
 
-            // Main cloud body (warm white)
-            c1.fillStyle = 'rgba(255,253,248,0.97)';
-            for (var i = 0; i < puffs.length; i++) {
-                c1.beginPath();
-                c1.arc(puffs[i].x, puffs[i].y, puffs[i].r, 0, Math.PI * 2);
-                c1.fill();
-            }
+            for (var y = 0; y < h; y++) {
+                for (var x = 0; x < w; x++) {
+                    var nx = (x / w) * nScale + ox;
+                    var ny = (y / h) * nScale + oy;
 
-            // Highlight on top puffs
-            c1.fillStyle = 'rgba(255,255,255,0.5)';
-            for (var i = 0; i < puffs.length; i++) {
-                if (puffs[i].y < h * 0.4) {
-                    c1.beginPath();
-                    c1.arc(puffs[i].x, puffs[i].y - puffs[i].r * 0.15, puffs[i].r * 0.7, 0, Math.PI * 2);
-                    c1.fill();
+                    // Domain warp for organic shape
+                    var w1 = fbm(nx + 5.2, ny + 1.3, 3) - 0.5;
+                    var w2 = fbm(nx + 8.1, ny + 3.7, 3) - 0.5;
+
+                    // Cloud texture
+                    var n = fbm(nx + w1 * 0.7, ny + w2 * 0.7, 5);
+
+                    // Asymmetric falloff: flat bottom, puffy top
+                    var dx = (x - cx) / rx;
+                    var dyRaw = y - cy;
+                    var localRy = dyRaw > 0 ? ry * 0.6 : ry;
+                    var dy = dyRaw / localRy;
+
+                    // Warp shape boundary
+                    var sw = fbm(nx * 1.8 + 20, ny * 1.8 + 20, 2) - 0.5;
+                    dx += sw * 0.2;
+                    dy += sw * 0.15;
+
+                    var dist = Math.sqrt(dx * dx + dy * dy);
+                    var falloff = Math.max(0, 1 - dist);
+                    falloff = falloff * falloff * falloff;
+
+                    var density = n * 1.4 * falloff;
+
+                    // Smoothstep threshold
+                    var e0 = 0.12, e1 = 0.5;
+                    var alpha = Math.max(0, Math.min(1, (density - e0) / (e1 - e0)));
+                    alpha = alpha * alpha * (3 - 2 * alpha);
+
+                    // Color: white top, gray-blue underside
+                    var topT = 1 - (y / h);
+                    var r = 255, g = 255, b = 255;
+
+                    if (y > h * 0.5) {
+                        var bt = (y - h * 0.5) / (h * 0.5);
+                        bt = Math.min(1, bt);
+                        r -= bt * 35;
+                        g -= bt * 30;
+                        b -= bt * 18;
+                    }
+
+                    // Brighten dense centers
+                    if (density > 0.35) {
+                        var bright = Math.min(1, (density - 0.35) * 3);
+                        r = Math.min(255, r + bright * 10);
+                        g = Math.min(255, g + bright * 10);
+                        b = Math.min(255, b + bright * 12);
+                    }
+
+                    var idx = (y * w + x) * 4;
+                    px[idx]     = Math.round(r);
+                    px[idx + 1] = Math.round(g);
+                    px[idx + 2] = Math.round(b);
+                    px[idx + 3] = Math.round(alpha * 255);
                 }
             }
 
-            // Pass 2: soften edges with blur
-            var oc2 = document.createElement('canvas');
-            oc2.width = oc1.width;
-            oc2.height = oc1.height;
-            var c2 = oc2.getContext('2d');
-            try {
-                c2.filter = 'blur(3px)';
-            } catch(e) {}
-            c2.drawImage(oc1, 0, 0);
+            octx.putImageData(imgData, 0, 0);
 
-            return { canvas: oc2, pad: pad };
+            // Slight blur for softness
+            var oc2 = document.createElement('canvas');
+            oc2.width = w; oc2.height = h;
+            var c2 = oc2.getContext('2d');
+            try { c2.filter = 'blur(1.5px)'; } catch(e) {}
+            c2.drawImage(oc, 0, 0);
+
+            return oc2;
         }
 
-        // Cloud definitions: position, size, speed, opacity
+        // Cloud definitions
         var cloudDefs = [
-            // Far layer — large, slow, translucent
-            { xFrac: 0.02,  yFrac: 0.06,  w: 340, h: 130, speed: 3,    alpha: 0.45, seed: 101 },
-            { xFrac: 0.5,   yFrac: 0.10,  w: 420, h: 150, speed: 2.5,  alpha: 0.4,  seed: 202 },
-            { xFrac: 0.28,  yFrac: 0.22,  w: 380, h: 140, speed: 3.5,  alpha: 0.38, seed: 303 },
+            // Far — large, slow, translucent
+            { xFrac: 0.0,   yFrac: 0.0,   w: 1050, h: 450, speed: 2.5,  alpha: 0.55, seed: 7  },
+            { xFrac: 0.5,   yFrac: 0.04,  w: 1200, h: 500, speed: 2,    alpha: 0.5,  seed: 13 },
+            { xFrac: 0.25,  yFrac: 0.16,  w: 1100, h: 470, speed: 3,    alpha: 0.45, seed: 23 },
 
-            // Mid layer — moderate
-            { xFrac: 0.08,  yFrac: 0.04,  w: 260, h: 105, speed: 7,    alpha: 0.65, seed: 404 },
-            { xFrac: 0.48,  yFrac: 0.16,  w: 290, h: 110, speed: 6,    alpha: 0.6,  seed: 505 },
-            { xFrac: 0.75,  yFrac: 0.24,  w: 240, h: 95,  speed: 8,    alpha: 0.55, seed: 606 },
-            { xFrac: 0.18,  yFrac: 0.34,  w: 270, h: 100, speed: 5.5,  alpha: 0.5,  seed: 707 },
+            // Mid
+            { xFrac: 0.08,  yFrac: 0.0,   w: 780, h: 340, speed: 5.5,  alpha: 0.75, seed: 37 },
+            { xFrac: 0.45,  yFrac: 0.1,   w: 840, h: 370, speed: 5,    alpha: 0.7,  seed: 47 },
+            { xFrac: 0.72,  yFrac: 0.18,  w: 720, h: 310, speed: 6,    alpha: 0.65, seed: 59 },
+            { xFrac: 0.15,  yFrac: 0.28,  w: 800, h: 340, speed: 4.5,  alpha: 0.6,  seed: 67 },
 
-            // Near layer — smaller, faster, more opaque
-            { xFrac: 0.38,  yFrac: 0.02,  w: 190, h: 78,  speed: 13,   alpha: 0.82, seed: 808 },
-            { xFrac: 0.82,  yFrac: 0.18,  w: 170, h: 70,  speed: 11,   alpha: 0.75, seed: 909 },
+            // Near — sharper, faster
+            { xFrac: 0.35,  yFrac: 0.0,   w: 600, h: 270, speed: 10,   alpha: 0.9,  seed: 79 },
+            { xFrac: 0.78,  yFrac: 0.11,  w: 540, h: 240, speed: 8.5,  alpha: 0.85, seed: 89 },
 
-            // Horizon haze — wide, very slow
-            { xFrac: -0.05, yFrac: 0.48,  w: 520, h: 170, speed: 1.5,  alpha: 0.28, seed: 111 },
-            { xFrac: 0.35,  yFrac: 0.53,  w: 480, h: 155, speed: 1.2,  alpha: 0.22, seed: 222 },
+            // Horizon haze
+            { xFrac: -0.05, yFrac: 0.42,  w: 1350, h: 500, speed: 1.3,  alpha: 0.3,  seed: 97  },
+            { xFrac: 0.32,  yFrac: 0.48,  w: 1230, h: 460, speed: 1,    alpha: 0.25, seed: 103 },
         ];
 
         var clouds = [];
@@ -894,17 +1021,16 @@
             clouds = [];
             for (var i = 0; i < cloudDefs.length; i++) {
                 var d = cloudDefs[i];
-                var rendered = preRenderCloud(d.w, d.h, d.seed);
+                var tex = generateCloudTexture(d.w, d.h, d.seed);
                 clouds.push({
-                    bitmap: rendered.canvas,
-                    pad: rendered.pad,
+                    bitmap: tex,
                     xFrac: d.xFrac,
                     yFrac: d.yFrac,
                     w: d.w,
                     h: d.h,
                     speed: d.speed,
                     alpha: d.alpha,
-                    phase: d.seed * 0.037
+                    phase: d.seed * 0.37
                 });
             }
         }
@@ -930,16 +1056,15 @@
 
             for (var i = 0; i < clouds.length; i++) {
                 var c = clouds[i];
-                // Gentle sinusoidal drift + slow linear creep
-                var sinDrift = Math.sin(t * 0.08 + c.phase) * 25;
+                var sinDrift = Math.sin(t * 0.05 + c.phase) * 30;
                 var linearDrift = t * c.speed;
                 var totalW = W + c.w * 2;
                 var baseX = c.xFrac * W;
                 var x = ((baseX + c.w + linearDrift + sinDrift) % totalW + totalW) % totalW - c.w;
-                var y = c.yFrac * H + Math.sin(t * 0.12 + c.phase) * 4;
+                var y = c.yFrac * H + Math.sin(t * 0.08 + c.phase) * 3;
 
                 ctx.globalAlpha = c.alpha;
-                ctx.drawImage(c.bitmap, x - c.pad, y - c.pad);
+                ctx.drawImage(c.bitmap, x, y, c.w, c.h);
             }
             ctx.globalAlpha = 1;
 
