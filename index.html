@@ -339,11 +339,11 @@
         .problem-item p { font-size: 0.88rem; color: var(--warm-gray-mid); line-height: 1.65; font-weight: 300; grid-column: 2; }
 
         /* ===================== RESEARCH ===================== */
-        .research { background: var(--muslin); padding: var(--section-y) var(--section-x); }
+        .research { background: var(--muslin); padding: var(--section-y) var(--section-x); overflow: hidden; }
         .research-inner { max-width: var(--content-max); margin: 0 auto; }
         .research-header {
             max-width: 600px;
-            margin-bottom: var(--s-64);
+            margin-bottom: var(--s-48);
         }
         .research h2 {
             font-family: var(--font-display);
@@ -359,21 +359,28 @@
             line-height: 1.75;
             font-weight: 300;
         }
+        .carousel-wrap { position: relative; }
         .research-findings {
             display: flex;
-            flex-direction: column;
             gap: var(--s-24);
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            padding-bottom: var(--s-8);
         }
+        .research-findings::-webkit-scrollbar { display: none; }
         .finding-card {
             background: var(--cream);
             border-radius: var(--radius-lg);
             padding: var(--s-32) var(--s-40);
             box-shadow: 0 2px 12px rgba(139, 115, 85, 0.04);
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
-        }
-        .finding-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 36px rgba(139, 115, 85, 0.09);
+            scroll-snap-align: start;
+            flex: 0 0 min(420px, 85vw);
+            min-height: 220px;
+            display: flex;
+            flex-direction: column;
         }
         .finding-card h3 {
             font-family: var(--font-display);
@@ -389,6 +396,7 @@
             line-height: 1.7;
             font-weight: 300;
             margin-bottom: var(--s-12);
+            flex: 1;
         }
         .finding-source {
             font-size: 0.72rem;
@@ -397,6 +405,47 @@
             letter-spacing: 0.03em;
         }
         .finding-source strong { color: var(--terracotta); font-weight: 500; }
+        .carousel-nav {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--s-16);
+            margin-top: var(--s-32);
+        }
+        .carousel-dots {
+            display: flex;
+            gap: var(--s-8);
+        }
+        .carousel-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--sand);
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+        }
+        .carousel-dot.active {
+            background: var(--terracotta);
+            transform: scale(1.25);
+        }
+        .carousel-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 1px solid rgba(44, 36, 24, 0.1);
+            background: var(--cream);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s, border-color 0.3s;
+            flex-shrink: 0;
+        }
+        .carousel-btn:hover { background: var(--parchment); border-color: rgba(44, 36, 24, 0.2); }
+        .carousel-btn:disabled { opacity: 0.3; cursor: default; }
+        .carousel-btn svg { width: 14px; height: 14px; stroke: var(--warm-black); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
         /* ===================== STATS ===================== */
         .stats {
@@ -440,6 +489,24 @@
         }
         .stat p { font-size: 0.78rem; color: rgba(255,255,255,0.7); line-height: 1.55; font-weight: 300; max-width: 220px; margin: 0 auto; }
         .stat-divider { width: 1px; height: var(--s-64); background: rgba(255,255,255,0.15); flex-shrink: 0; border-radius: 1px; margin-top: var(--s-8); }
+
+        /* ===================== PIVOT ===================== */
+        .pivot {
+            background: var(--muslin);
+            padding: var(--s-120) var(--section-x);
+            display: flex;
+            justify-content: center;
+            text-align: center;
+        }
+        .pivot-text {
+            font-family: var(--font-body);
+            font-style: italic;
+            font-size: clamp(1.0rem, 2vw, 1.4rem);
+            color: var(--warm-black);
+            line-height: 1.45;
+            max-width: 620px;
+            font-weight: 300;
+        }
 
         /* ===================== SOLUTION ===================== */
         .solution { background: var(--cream); padding: var(--section-y) var(--section-x); }
@@ -597,7 +664,7 @@
             .stat { width: 100%; max-width: 400px; }
             .stat p { max-width: 320px; }
             .stat-divider { width: var(--s-48); height: 1px; margin: 0 auto; }
-            .finding-card { padding: var(--s-24); }
+            .finding-card { padding: var(--s-24); flex: 0 0 min(360px, 85vw); min-height: 200px; }
             .research-header { text-align: center; margin-left: auto; margin-right: auto; }
             .letter-inner { text-align: center; }
             .voices-header { text-align: center; }
@@ -630,9 +697,13 @@
 
             /* Research */
             .research-header { margin-bottom: var(--s-40); }
-            .finding-card { padding: var(--s-16) var(--s-24); }
+            .finding-card { padding: var(--s-24); flex: 0 0 min(300px, 82vw); min-height: 180px; }
             .finding-card h3 { font-size: 1rem; }
             .finding-card p { font-size: 0.84rem; }
+
+            /* Pivot */
+            .pivot { padding: var(--s-80) var(--section-x); }
+            .pivot-text { font-size: clamp(1.25rem, 5.5vw, 1.5rem); }
 
             /* Stats */
             .stats { padding: var(--s-40) var(--section-x); }
@@ -670,7 +741,7 @@
         <div class="hero-content">
             <div class="hero-wordmark"><img src="logo.png" alt="Jia"></div>
             <h1>Feel close,<br>even when<br>you're <em>far away</em></h1>
-            <p class="hero-sub">A private digital home for families across time zones. No group chat chaos. No posting pressure. Just warmth.</p>
+            <p class="hero-sub">A private digital home for families across time zones.</p>
             <div class="hero-form-wrap">
                 <div id="hero-form-container">
                     <form class="waitlist-form" id="hero-waitlist-form">
@@ -699,28 +770,28 @@
             <div class="problem-text reveal">
                 <p class="section-eyebrow" style="color: var(--terracotta-glow);">The distance problem</p>
                 <h2>304 million people live far from family. <em>The tools haven't caught up.</em></h2>
-                <p class="problem-lede">Existing solutions are too transactional, too performative, or too fragmented. None of them create closeness.</p>
+                <p class="problem-lede">Existing solutions are too transactional and too fragmented. None of them create closeness.</p>
             </div>
             <div class="problem-list">
                 <div class="problem-item reveal reveal-d1">
                     <span class="problem-num">1</span>
                     <h3>Group chats go quiet</h3>
-                    <p>Family groups start strong, then slowly die. Posting feels like shouting into a void where nobody knows who's reading.</p>
+                    <p>Family groups start strong, then slowly fizzle. Posting feels like shouting into a void.</p>
                 </div>
                 <div class="problem-item reveal reveal-d2">
                     <span class="problem-num">2</span>
                     <h3>Calls that never happen</h3>
-                    <p>You mean to call every week. But with 8 hours between you, finding a time that isn't 2am becomes impossible.</p>
+                    <p>You mean to call every week. But with hours between you, finding a time becomes impossible.</p>
                 </div>
                 <div class="problem-item reveal reveal-d3">
                     <span class="problem-num">3</span>
                     <h3>The guilt compounds</h3>
-                    <p>Every missed birthday, every "you never call" comment, every time your parents look noticeably older on FaceTime.</p>
+                    <p>Every missed birthday, every "you never call" comment, and your parents looking noticeably older on FaceTime.</p>
                 </div>
                 <div class="problem-item reveal reveal-d4">
                     <span class="problem-num">4</span>
                     <h3>Parents feel left out</h3>
-                    <p>They want to see your life. But social media feels performative, and video calls feel like an obligation for everyone.</p>
+                    <p>They want to see your life. But social media feels performative, and video calls feels like logistics.</p>
                 </div>
             </div>
         </div>
@@ -731,33 +802,39 @@
             <div class="research-header reveal">
                 <p class="section-eyebrow" style="color: var(--clay);">What We Found</p>
                 <h2>We spent months listening to families.</h2>
-                <p class="research-lede">Reddit. Twitter. App Store reviews. Academic journals. We went looking for the truth about what happens to family relationships when distance becomes the default.</p>
+                <p class="research-lede">We went looking for the truth about what happens to family relationships when distance becomes the default. Reddit. Twitter. App Store reviews. Academic journals. </p>
             </div>
-            <div class="research-findings">
-                <div class="finding-card reveal reveal-d1">
-                    <h3>Parents' tech calls are actually loneliness calls</h3>
-                    <p>When mum calls about a popup on her laptop, she doesn't need IT help. She needs to hear your voice. Every small tech problem becomes a legitimate reason to reach out — because there's no other easy, low-pressure way to say "I miss you."</p>
-                    <span class="finding-source">r/AgingParents · <strong>114 upvotes</strong></span>
+            <div class="carousel-wrap reveal">
+                <div class="research-findings" id="research-carousel">
+                    <div class="finding-card">
+                        <h3>Parents' tech calls are actually loneliness calls</h3>
+                        <p>When mum calls about a popup on her laptop, she doesn't need IT help. She needs to hear your voice. Every small tech problem becomes a legitimate reason to reach out — because there's no other easy, low-pressure way to say "I miss you."</p>
+                        <span class="finding-source">r/AgingParents · <strong>114 upvotes</strong></span>
+                    </div>
+                    <div class="finding-card">
+                        <h3>Having kids makes the distance unbearable</h3>
+                        <p>Moving abroad was manageable before children. But once you're a parent, the weight of your own parents not being there — not seeing first steps, not being part of the village — becomes something you carry every single day.</p>
+                        <span class="finding-source">r/expats · <strong>214 upvotes</strong></span>
+                    </div>
+                    <div class="finding-card">
+                        <h3>WhatsApp becomes toxic when it matters most</h3>
+                        <p>When aging parents need care, family group chats turn into guilt trips and blame games. Siblings weaponize distance. The tool designed for communication becomes the source of family conflict at the worst possible time.</p>
+                        <span class="finding-source">Leaked family chat · r/Bolehland · <strong>1,050 upvotes</strong></span>
+                    </div>
+                    <div class="finding-card">
+                        <h3>Existing apps are failing on the thing that matters most</h3>
+                        <p>We analyzed thousands of App Store reviews for family apps. The #1 complaint: no time zone awareness. Followed closely by: too complicated for parents, feels like just another social media app, and no way to participate without posting content.</p>
+                        <span class="finding-source">App Store review analysis · Jia Research, 2026</span>
+                    </div>
                 </div>
-                <div class="finding-card reveal reveal-d1">
-                    <h3>Having kids makes the distance unbearable</h3>
-                    <p>Moving abroad was manageable before children. But once you're a parent, the weight of your own parents not being there — not seeing first steps, not being part of the village — becomes something you carry every single day.</p>
-                    <span class="finding-source">r/expats · <strong>214 upvotes</strong></span>
-                </div>
-                <div class="finding-card reveal reveal-d2">
-                    <h3>WhatsApp becomes toxic when it matters most</h3>
-                    <p>When aging parents need care, family group chats turn into guilt trips and blame games. Siblings weaponize distance. The tool designed for communication becomes the source of family conflict at the worst possible time.</p>
-                    <span class="finding-source">Leaked family chat · r/Bolehland · <strong>1,050 upvotes</strong></span>
-                </div>
-                <div class="finding-card reveal reveal-d2">
-                    <h3>People move entire countries to feel close again</h3>
-                    <p>Expats earning more abroad choose to uproot everything — careers, relationships, entire lives — and move back. Because no app, no video call, no group chat was enough to make the distance feel okay. That's the scale of the problem.</p>
-                    <span class="finding-source">Pattern across r/expats, r/AmerExit, r/dubai</span>
-                </div>
-                <div class="finding-card reveal reveal-d3">
-                    <h3>Existing apps are failing on the thing that matters most</h3>
-                    <p>We analyzed thousands of App Store reviews for family apps. The #1 complaint: no time zone awareness. Followed closely by: too complicated for parents, feels like just another social media app, and no way to participate without posting content.</p>
-                    <span class="finding-source">App Store review analysis · Jia Research, 2026</span>
+                <div class="carousel-nav">
+                    <button class="carousel-btn" id="carousel-prev" aria-label="Previous">
+                        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+                    </button>
+                    <div class="carousel-dots" id="carousel-dots"></div>
+                    <button class="carousel-btn" id="carousel-next" aria-label="Next">
+                        <svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg>
+                    </button>
                 </div>
             </div>
         </div>
@@ -767,22 +844,23 @@
         <div class="stats-inner">
             <div class="stat reveal">
                 <div class="stat-num">73%</div>
-                <div class="stat-label">Communication breakdowns</div>
                 <p>Of transnational families report communication breakdowns within 6 months</p>
             </div>
             <div class="stat-divider"></div>
             <div class="stat reveal reveal-d1">
                 <div class="stat-num">2×</div>
-                <div class="stat-label">Migration has doubled</div>
-                <p>People living outside their birth country has nearly doubled since 1990 — and it's accelerating. UN DESA, 2024</p>
+                <p>People living outside their birth country has nearly doubled since 1990 (still accelerating).</p>
             </div>
             <div class="stat-divider"></div>
             <div class="stat reveal reveal-d2">
                 <div class="stat-num">40%</div>
-                <div class="stat-label">Parents are lonely</div>
-                <p>Adults aged 45+ report regular loneliness. "Children moving away" is one of the most cited triggers. WHO & AARP</p>
+                <p>Adults aged 45+ report loneliness. "Children moving away" is one of the most cited triggers.</p>
             </div>
         </div>
+    </section>
+
+    <section class="pivot">
+        <p class="pivot-text reveal">What if being away from home doesn't mean that you have to drift away from your parents and siblings?</p>
     </section>
 
     <section class="solution">
@@ -790,43 +868,43 @@
             <div class="solution-header reveal">
                 <p class="section-eyebrow" style="color: var(--terracotta);">How Jia helps</p>
                 <h2>Not a chat app.<br>A place to <em>come home to.</em></h2>
-                <p class="solution-lede">A private space designed for warmth — where watching counts as participating, and a small hello is always enough.</p>
+                <p class="solution-lede">A private space designed for warmth.</p>
             </div>
             <div class="feature-grid">
                 <div class="feature-card reveal">
                     <span class="feature-num">01</span>
                     <div class="feature-title">Postcards</div>
-                    <p class="feature-desc">Share a photo, voice note, or short video. No caption required. No pressure to be interesting. Just a small window into your day.</p>
+                    <p class="feature-desc">Share a photo, voice note, or short video. No caption required. Just a small window into your day.</p>
                     <span class="feature-tag">Low effort · High warmth</span>
                 </div>
                 <div class="feature-card reveal reveal-d1">
                     <span class="feature-num">02</span>
                     <div class="feature-title">Weekly Recaps</div>
-                    <p class="feature-desc">Every week, Jia gathers your family's moments into one view. Check in once, never miss a thing. The weekly heartbeat of your family.</p>
+                    <p class="feature-desc">Every week, Jia gathers your family's moments into one view. Check in once, never miss a thing.</p>
                     <span class="feature-tag">Weekly ritual</span>
                 </div>
                 <div class="feature-card reveal reveal-d1">
                     <span class="feature-num">03</span>
                     <div class="feature-title">Overlap Finder</div>
-                    <p class="feature-desc">Tell Jia when you're free. It finds the windows when everyone's awake and available — so those calls actually happen.</p>
+                    <p class="feature-desc">Jia finds windows when everyone's awake & available — so calls happen effortlessly.</p>
                     <span class="feature-tag">Time zone aware</span>
                 </div>
                 <div class="feature-card reveal reveal-d2">
                     <span class="feature-num">04</span>
                     <div class="feature-title">Watch-only Mode</div>
-                    <p class="feature-desc">Parents and grandparents can browse and react without creating anything. Feeling included doesn't require content creation.</p>
+                    <p class="feature-desc">Parents or grandparents can view and react without creating anything. Feeling included should be easy.</p>
                     <span class="feature-tag">Designed for parents</span>
                 </div>
                 <div class="feature-card reveal reveal-d2">
                     <span class="feature-num">05</span>
                     <div class="feature-title">Family Nights</div>
-                    <p class="feature-desc">Schedule dinner or movie night across time zones. Share your plate. Rate the film. Small rituals that build closeness over time.</p>
+                    <p class="feature-desc">Schedule dinner or movie night across time zones. Small rituals that build closeness over time.</p>
                     <span class="feature-tag">Shared experiences</span>
                 </div>
                 <div class="feature-card reveal reveal-d3">
                     <span class="feature-num">06</span>
                     <div class="feature-title">Gentle Prompts</div>
-                    <p class="feature-desc">"Spot something red this week." Fun, concrete prompts that give everyone something easy to share — never homework, never guilt.</p>
+                    <p class="feature-desc">"Spot something red this week." Fun prompts that give everyone something easy to share and bond over.</p>
                     <span class="feature-tag">No pressure</span>
                 </div>
             </div>
@@ -836,9 +914,8 @@
     <section class="letter">
         <div class="letter-inner reveal">
             <h2>We're building this because we've <em>lived it.</em></h2>
-            <p>If you've ever sat in a different time zone, staring at your phone, wondering if it's too late to call — this is for you.</p>
-            <p>If you've ever opened a family group chat to a wall of unread messages and felt too tired to catch up — this is for you.</p>
-            <p>If your parents have ever called about a "computer problem" that wasn't really about the computer — this is for you.</p>
+            <p>If you've ever sat in a different time zone, staring at your phone, wondering if it's too late to call - this is for you.</p>
+            <p>If you've ever opened a family group chat to a wall of unread messages and felt too tired to catch up - this is for you.</p>
             <p>We built Jia because we believe families shouldn't need to choose between moving back and feeling close. Distance is the reality. But disconnection doesn't have to be.</p>
             <p>We're not building another messaging app. We're building the feeling of being home — even when home is 10,000 kilometres away.</p>
             <p class="letter-sig">— The Jia team</p>
@@ -865,7 +942,7 @@
 
     <footer class="site-footer">
         <p class="footer-mark">Jia</p>
-        <p>Made with love for families far apart ·
+        <p>Made with love for families far apart
     </footer>
 
     <script>
@@ -1143,6 +1220,65 @@
             alert('Something went wrong — please try again.');
         });
     }
+
+    // ==========================================
+    // RESEARCH CAROUSEL
+    // ==========================================
+    (function() {
+        var track = document.getElementById('research-carousel');
+        var prev = document.getElementById('carousel-prev');
+        var next = document.getElementById('carousel-next');
+        var dotsWrap = document.getElementById('carousel-dots');
+        if (!track || !prev || !next || !dotsWrap) return;
+
+        var cards = track.querySelectorAll('.finding-card');
+        var current = 0;
+
+        // Build dots
+        for (var i = 0; i < cards.length; i++) {
+            var dot = document.createElement('button');
+            dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+            dot.setAttribute('aria-label', 'Go to finding ' + (i + 1));
+            dot.dataset.index = i;
+            dotsWrap.appendChild(dot);
+        }
+        var dots = dotsWrap.querySelectorAll('.carousel-dot');
+
+        function goTo(idx) {
+            idx = Math.max(0, Math.min(idx, cards.length - 1));
+            current = idx;
+            cards[idx].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+            for (var j = 0; j < dots.length; j++) {
+                dots[j].classList.toggle('active', j === idx);
+            }
+        }
+
+        prev.addEventListener('click', function() { goTo(current - 1); });
+        next.addEventListener('click', function() { goTo(current + 1); });
+        dotsWrap.addEventListener('click', function(e) {
+            var dot = e.target.closest('.carousel-dot');
+            if (dot) goTo(parseInt(dot.dataset.index));
+        });
+
+        // Update dots on scroll
+        var scrollTimer;
+        track.addEventListener('scroll', function() {
+            clearTimeout(scrollTimer);
+            scrollTimer = setTimeout(function() {
+                var trackLeft = track.scrollLeft;
+                var closest = 0;
+                var closestDist = Infinity;
+                for (var i = 0; i < cards.length; i++) {
+                    var dist = Math.abs(cards[i].offsetLeft - track.offsetLeft - trackLeft);
+                    if (dist < closestDist) { closestDist = dist; closest = i; }
+                }
+                current = closest;
+                for (var j = 0; j < dots.length; j++) {
+                    dots[j].classList.toggle('active', j === closest);
+                }
+            }, 80);
+        });
+    })();
 
     var heroForm = document.getElementById('hero-waitlist-form');
     if (heroForm) heroForm.addEventListener('submit', function(e) { submitWaitlist(e, 'hero-waitlist-form', 'hero-success', 'hero-form-container'); });
