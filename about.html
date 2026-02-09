@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About — Jia</title>
+    <meta name="description" content="The story behind Jia — a private digital home for families across time zones.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=Poppins:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --s-4: 4px; --s-8: 8px; --s-12: 12px; --s-16: 16px;
+            --s-24: 24px; --s-32: 32px; --s-40: 40px; --s-48: 48px;
+            --s-56: 56px; --s-64: 64px; --s-80: 80px; --s-96: 96px;
+            --s-120: 120px;
+            --terracotta: #C4704B;
+            --terracotta-deep: #a8573a;
+            --terracotta-glow: #d4896a;
+            --clay: #8B7355;
+            --warm-black: #2C2418;
+            --warm-gray: #6B6156;
+            --warm-gray-mid: #8a7f73;
+            --warm-gray-light: #a89d91;
+            --muslin: #F1EFE6;
+            --cream: #FAF8F2;
+            --parchment: #ede5d8;
+            --sand: #d8c4ac;
+            --font-display: 'Old Standard TT', Georgia, serif;
+            --font-body: 'Poppins', system-ui, sans-serif;
+            --section-x: clamp(20px, 5vw, 40px);
+            --section-y: clamp(80px, 10vw, 120px);
+            --content-max: 960px;
+            --radius-sm: 12px; --radius-md: 20px; --radius-lg: 28px; --radius-pill: 100px;
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+        body {
+            font-family: var(--font-body);
+            color: var(--warm-black);
+            overflow-x: hidden;
+            background: var(--muslin);
+        }
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.025;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            background-size: 200px;
+        }
+
+        /* ===================== CLOUD NAV ===================== */
+        .cloud-nav { position: fixed; top: 0; left: 0; z-index: 1000; }
+        .nav-trigger {
+            position: fixed; top: var(--s-24); left: var(--s-24); z-index: 1002;
+            cursor: pointer; display: flex; flex-direction: column; justify-content: center;
+            gap: 6px; background: none; border: none; padding: var(--s-8);
+        }
+        .nav-line {
+            display: block; height: 1.5px; background: var(--warm-black);
+            border-radius: 2px; transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        .nav-line:first-child { width: 22px; }
+        .nav-line:last-child { width: 14px; }
+        .nav-trigger:hover .nav-line:last-child { width: 22px; }
+        .cloud-nav.open .nav-line:first-child { transform: translateY(3.75px) rotate(45deg); }
+        .cloud-nav.open .nav-line:last-child { width: 22px; transform: translateY(-3.75px) rotate(-45deg); }
+        .nav-panel {
+            position: fixed; top: 80px; left: 44px; z-index: 1001;
+            display: flex; flex-direction: column; gap: var(--s-8);
+            opacity: 0; transform: translateY(10px);
+            transition: opacity 0.4s ease 0.2s, transform 0.5s cubic-bezier(0.19, 1, 0.22, 1) 0.2s;
+            pointer-events: none;
+        }
+        .cloud-nav.open .nav-panel { opacity: 1; transform: translateY(0); pointer-events: auto; }
+        .nav-link {
+            font-family: var(--font-display); font-size: 1.2rem; color: var(--warm-black);
+            text-decoration: none; padding: var(--s-4) 0; position: relative;
+            transition: color 0.3s; font-weight: 400;
+        }
+        .nav-link::after {
+            content: ''; position: absolute; bottom: 2px; left: 0; width: 100%; height: 1px;
+            background: var(--terracotta); transform: scaleX(0); transform-origin: left;
+            transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        .nav-link:hover { color: var(--terracotta); }
+        .nav-link:hover::after { transform: scaleX(1); }
+
+        /* Page transition — layered cloud fade */
+        .page-transition { position: fixed; inset: 0; z-index: 10000; pointer-events: none; }
+        .page-transition.active { pointer-events: auto; }
+        .cloud-layer { position: absolute; inset: 0; opacity: 0; will-change: opacity, transform; }
+        .cl-1 {
+            background:
+                radial-gradient(ellipse 55% 50% at 8% 12%, rgba(250,248,242,0.97), transparent 70%),
+                radial-gradient(ellipse 50% 55% at 85% 8%, rgba(241,239,230,0.92), transparent 65%),
+                radial-gradient(ellipse 60% 40% at 35% 90%, rgba(250,248,242,0.88), transparent 60%),
+                radial-gradient(ellipse 40% 50% at 92% 75%, rgba(241,239,230,0.82), transparent 55%);
+            transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: scale(1.05);
+        }
+        .cl-2 {
+            background:
+                radial-gradient(ellipse 65% 60% at 20% 40%, rgba(250,248,242,0.95), transparent 60%),
+                radial-gradient(ellipse 50% 65% at 78% 50%, rgba(241,239,230,0.92), transparent 55%),
+                radial-gradient(ellipse 70% 50% at 50% 15%, rgba(250,248,242,0.88), transparent 50%),
+                radial-gradient(ellipse 55% 45% at 10% 82%, rgba(241,239,230,0.85), transparent 58%);
+            transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.08s, transform 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.08s;
+            transform: scale(1.03);
+        }
+        .cl-3 {
+            background:
+                radial-gradient(ellipse 60% 55% at 55% 30%, rgba(250,248,242,0.96), transparent 55%),
+                radial-gradient(ellipse 70% 50% at 15% 60%, rgba(241,239,230,0.93), transparent 50%),
+                radial-gradient(ellipse 55% 60% at 88% 35%, rgba(250,248,242,0.9), transparent 55%),
+                radial-gradient(ellipse 65% 45% at 45% 80%, rgba(241,239,230,0.87), transparent 52%);
+            transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.16s, transform 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.16s;
+            transform: scale(1.01);
+        }
+        .cl-4 { background: var(--cream); transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.26s; }
+        .page-transition.expanding .cloud-layer { opacity: 1; transform: scale(1); }
+        .page-transition.entrance .cloud-layer { opacity: 1; transform: scale(1); transition: none; }
+        .page-transition.entrance.shrinking .cl-4 { opacity: 0; transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.1s; }
+        .page-transition.entrance.shrinking .cl-3 { opacity: 0; transform: scale(1.02); transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0.2s, transform 0.9s cubic-bezier(0.4, 0, 0.2, 1) 0.2s; }
+        .page-transition.entrance.shrinking .cl-2 { opacity: 0; transform: scale(1.04); transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0.3s, transform 0.9s cubic-bezier(0.4, 0, 0.2, 1) 0.3s; }
+        .page-transition.entrance.shrinking .cl-1 { opacity: 0; transform: scale(1.06); transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.4s, transform 1s cubic-bezier(0.4, 0, 0.2, 1) 0.4s; }
+
+        /* ===================== PAGE CONTENT ===================== */
+        .page-header {
+            padding: var(--s-120) var(--section-x) var(--s-64);
+            max-width: 640px;
+            margin: 0 auto;
+        }
+        .page-header h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2.2rem, 4.5vw, 3.2rem);
+            font-weight: 400;
+            line-height: 1.15;
+            margin-bottom: var(--s-24);
+        }
+        .page-header h1 em { font-style: italic; color: var(--terracotta); }
+        .page-header .subtitle {
+            font-size: 1rem;
+            color: var(--warm-gray);
+            line-height: 1.75;
+            font-weight: 300;
+        }
+
+        .page-body {
+            max-width: 640px;
+            margin: 0 auto;
+            padding: 0 var(--section-x) var(--section-y);
+        }
+        .page-body p {
+            font-size: 0.95rem;
+            color: var(--warm-gray);
+            line-height: 1.85;
+            font-weight: 300;
+            margin-bottom: var(--s-24);
+        }
+        .page-body p strong {
+            color: var(--warm-black);
+            font-weight: 400;
+        }
+        .page-body .sig {
+            font-family: var(--font-display);
+            font-style: italic;
+            font-size: 1rem;
+            color: var(--terracotta);
+            font-weight: 400;
+            margin-top: var(--s-16);
+        }
+
+        .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.9s cubic-bezier(0.19,1,0.22,1), transform 0.9s cubic-bezier(0.19,1,0.22,1); }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .reveal-d1 { transition-delay: 0.1s; }
+        .reveal-d2 { transition-delay: 0.2s; }
+
+        /* ===================== FOOTER ===================== */
+        .site-footer { background: var(--warm-black); padding: var(--s-48) var(--section-x); text-align: center; }
+        .footer-mark { font-family: var(--font-display); font-size: 0.8rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--warm-gray-mid); margin-bottom: var(--s-8); }
+        .site-footer p { font-size: 0.75rem; color: rgba(155,146,134,0.5); font-weight: 300; }
+        .site-footer a { color: var(--terracotta-glow); text-decoration: none; transition: color 0.3s; }
+        .site-footer a:hover { color: var(--terracotta); }
+        .footer-ig { display: inline-block; margin-top: var(--s-16); color: var(--warm-gray-mid); transition: color 0.3s, transform 0.3s; }
+        .footer-ig:hover { color: var(--terracotta-glow); transform: scale(1.1); }
+
+        @media (max-width: 480px) {
+            .page-header { padding: var(--s-96) var(--section-x) var(--s-40); }
+            .page-header h1 { font-size: clamp(1.8rem, 7vw, 2.2rem); }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="cloud-nav" id="cloud-nav">
+        <button class="nav-trigger" id="nav-trigger" aria-label="Menu" aria-expanded="false">
+            <span class="nav-line"></span>
+            <span class="nav-line"></span>
+        </button>
+        <div class="nav-panel">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="blog.html" class="nav-link">Blog</a>
+        </div>
+    </nav>
+    <div class="page-transition" id="page-transition">
+        <div class="cloud-layer cl-1"></div>
+        <div class="cloud-layer cl-2"></div>
+        <div class="cloud-layer cl-3"></div>
+        <div class="cloud-layer cl-4"></div>
+    </div>
+
+    <div class="page-header reveal">
+        <h1>Jia means <em>home.</em></h1>
+        <p class="subtitle">We're a small team of third-culture kids who know what it feels like to love your family deeply, and still feel the distance growing.</p>
+    </div>
+
+    <div class="page-body">
+        <p class="reveal reveal-d1">We started Jia because we noticed that the tools that exist for staying connected with family weren't designed for families like ours. They were designed for long-distance friends, partners, or the public. None of them understood time zones, cultural differences, or the quiet guilt of not calling enough.</p>
+
+        <p class="reveal reveal-d1"><strong>家 (jiā)</strong> is the Mandarin word for home and family. It's one of the first characters children learn to write. For us, it carries the weight of everything we're trying to build - a feeling of belonging that distance can't dissolve.</p>
+
+        <p class="reveal reveal-d2">Jia is our attempt to build something that actually works for families across distance. Not another chat app. Not another social feed. A warm, private space that makes staying close feel effortless.</p>
+
+        <p class="reveal reveal-d2">Every feature we design, we test on our own families first. If it doesn't make us feel closer to our parents and siblings, it doesn't ship.</p>
+
+        <p class="sig reveal reveal-d2">— The Jia team</p>
+    </div>
+
+    <footer class="site-footer">
+        <p class="footer-mark">Jia</p>
+        <p>Made with love for families far apart</p>
+        <a href="https://www.instagram.com/jia.app/" target="_blank" rel="noopener" aria-label="Jia on Instagram" class="footer-ig">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
+        </a>
+    </footer>
+
+    <script>
+    // Reveal
+    var obs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+            if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+        });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(function(el) { obs.observe(el); });
+
+    // Nav + page transition
+    (function() {
+        var nav = document.getElementById('cloud-nav');
+        var trigger = document.getElementById('nav-trigger');
+        var links = nav.querySelectorAll('.nav-link');
+        var pt = document.getElementById('page-transition');
+
+        trigger.addEventListener('click', function() {
+            nav.classList.toggle('open');
+            trigger.setAttribute('aria-expanded', nav.classList.contains('open'));
+        });
+        document.addEventListener('click', function(e) {
+            if (nav.classList.contains('open') && !nav.contains(e.target)) {
+                nav.classList.remove('open'); trigger.setAttribute('aria-expanded', 'false');
+            }
+        });
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && nav.classList.contains('open')) { nav.classList.remove('open'); trigger.setAttribute('aria-expanded', 'false'); }
+        });
+
+        for (var i = 0; i < links.length; i++) {
+            links[i].addEventListener('click', function(e) {
+                e.preventDefault();
+                var href = this.getAttribute('href');
+                nav.classList.remove('open');
+                pt.classList.add('active', 'expanding');
+                setTimeout(function() {
+                    sessionStorage.setItem('jia-cloud-transition', '1');
+                    window.location.href = href;
+                }, 950);
+            });
+        }
+        if (sessionStorage.getItem('jia-cloud-transition')) {
+            sessionStorage.removeItem('jia-cloud-transition');
+            pt.classList.add('active', 'entrance');
+            pt.offsetHeight;
+            pt.classList.add('shrinking');
+            setTimeout(function() { pt.classList.remove('active', 'entrance', 'shrinking'); }, 1400);
+        }
+    })();
+    </script>
+</body>
+</html>

@@ -642,6 +642,164 @@
         .site-footer p { font-size: 0.75rem; color: rgba(155,146,134,0.5); font-weight: 300; }
         .site-footer a { color: var(--terracotta-glow); text-decoration: none; transition: color 0.3s; }
         .site-footer a:hover { color: var(--terracotta); }
+        .footer-ig { display: inline-block; margin-top: var(--s-16); color: var(--warm-gray-mid); transition: color 0.3s, transform 0.3s; }
+        .footer-ig:hover { color: var(--terracotta-glow); transform: scale(1.1); }
+
+        /* ===================== CLOUD NAV ===================== */
+        .cloud-nav { position: fixed; top: 0; left: 0; z-index: 1000; }
+        .nav-trigger {
+            position: fixed;
+            top: var(--s-24);
+            left: var(--s-24);
+            z-index: 1002;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 6px;
+            background: none;
+            border: none;
+            padding: var(--s-8);
+        }
+        .nav-line {
+            display: block;
+            height: 1.5px;
+            background: var(--warm-black);
+            border-radius: 2px;
+            transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        .nav-line:first-child { width: 22px; }
+        .nav-line:last-child { width: 14px; }
+        .nav-trigger:hover .nav-line:last-child { width: 22px; }
+
+        .cloud-nav.open .nav-line:first-child {
+            transform: translateY(3.75px) rotate(45deg);
+        }
+        .cloud-nav.open .nav-line:last-child {
+            width: 22px;
+            transform: translateY(-3.75px) rotate(-45deg);
+        }
+
+        .nav-panel {
+            position: fixed;
+            top: 80px;
+            left: 44px;
+            z-index: 1001;
+            display: flex;
+            flex-direction: column;
+            gap: var(--s-8);
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.4s ease 0.2s, transform 0.5s cubic-bezier(0.19, 1, 0.22, 1) 0.2s;
+            pointer-events: none;
+        }
+        .cloud-nav.open .nav-panel {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        .nav-link {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            color: var(--warm-black);
+            text-decoration: none;
+            padding: var(--s-4) 0;
+            position: relative;
+            transition: color 0.3s;
+            font-weight: 400;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: var(--terracotta);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        .nav-link:hover { color: var(--terracotta); }
+        .nav-link:hover::after { transform: scaleX(1); }
+
+        /* Page transition — layered cloud fade */
+        .page-transition {
+            position: fixed;
+            inset: 0;
+            z-index: 10000;
+            pointer-events: none;
+        }
+        .page-transition.active { pointer-events: auto; }
+        .cloud-layer {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            will-change: opacity, transform;
+        }
+        .cl-1 {
+            background:
+                radial-gradient(ellipse 55% 50% at 8% 12%, rgba(250,248,242,0.97), transparent 70%),
+                radial-gradient(ellipse 50% 55% at 85% 8%, rgba(241,239,230,0.92), transparent 65%),
+                radial-gradient(ellipse 60% 40% at 35% 90%, rgba(250,248,242,0.88), transparent 60%),
+                radial-gradient(ellipse 40% 50% at 92% 75%, rgba(241,239,230,0.82), transparent 55%);
+            transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: scale(1.05);
+        }
+        .cl-2 {
+            background:
+                radial-gradient(ellipse 65% 60% at 20% 40%, rgba(250,248,242,0.95), transparent 60%),
+                radial-gradient(ellipse 50% 65% at 78% 50%, rgba(241,239,230,0.92), transparent 55%),
+                radial-gradient(ellipse 70% 50% at 50% 15%, rgba(250,248,242,0.88), transparent 50%),
+                radial-gradient(ellipse 55% 45% at 10% 82%, rgba(241,239,230,0.85), transparent 58%);
+            transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.08s, transform 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.08s;
+            transform: scale(1.03);
+        }
+        .cl-3 {
+            background:
+                radial-gradient(ellipse 60% 55% at 55% 30%, rgba(250,248,242,0.96), transparent 55%),
+                radial-gradient(ellipse 70% 50% at 15% 60%, rgba(241,239,230,0.93), transparent 50%),
+                radial-gradient(ellipse 55% 60% at 88% 35%, rgba(250,248,242,0.9), transparent 55%),
+                radial-gradient(ellipse 65% 45% at 45% 80%, rgba(241,239,230,0.87), transparent 52%);
+            transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.16s, transform 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.16s;
+            transform: scale(1.01);
+        }
+        .cl-4 {
+            background: var(--cream);
+            transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.26s;
+        }
+
+        /* Expanding: clouds roll in */
+        .page-transition.expanding .cloud-layer {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Entrance: starts fully covered */
+        .page-transition.entrance .cloud-layer {
+            opacity: 1;
+            transform: scale(1);
+            transition: none;
+        }
+
+        /* Shrinking: clouds clear away (reverse stagger) */
+        .page-transition.entrance.shrinking .cl-4 {
+            opacity: 0;
+            transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.1s;
+        }
+        .page-transition.entrance.shrinking .cl-3 {
+            opacity: 0; transform: scale(1.02);
+            transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0.2s, transform 0.9s cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
+        }
+        .page-transition.entrance.shrinking .cl-2 {
+            opacity: 0; transform: scale(1.04);
+            transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0.3s, transform 0.9s cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
+        }
+        .page-transition.entrance.shrinking .cl-1 {
+            opacity: 0; transform: scale(1.06);
+            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.4s, transform 1s cubic-bezier(0.4, 0, 0.2, 1) 0.4s;
+        }
 
         /* ===================== REVEAL ===================== */
         .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.9s cubic-bezier(0.19,1,0.22,1), transform 0.9s cubic-bezier(0.19,1,0.22,1); }
@@ -733,6 +891,23 @@
 </head>
 <body>
 
+    <nav class="cloud-nav" id="cloud-nav">
+        <button class="nav-trigger" id="nav-trigger" aria-label="Menu" aria-expanded="false">
+            <span class="nav-line"></span>
+            <span class="nav-line"></span>
+        </button>
+        <div class="nav-panel">
+            <a href="about.html" class="nav-link">About</a>
+            <a href="blog.html" class="nav-link">Blog</a>
+        </div>
+    </nav>
+    <div class="page-transition" id="page-transition">
+        <div class="cloud-layer cl-1"></div>
+        <div class="cloud-layer cl-2"></div>
+        <div class="cloud-layer cl-3"></div>
+        <div class="cloud-layer cl-4"></div>
+    </div>
+
     <section class="hero">
         <div class="hero-sky"></div>
         <div class="hero-haze"></div>
@@ -802,28 +977,23 @@
             <div class="research-header reveal">
                 <p class="section-eyebrow" style="color: var(--clay);">What We Found</p>
                 <h2>We spent months listening to families.</h2>
-                <p class="research-lede">We went looking for the truth about what happens to family relationships when distance becomes the default. Reddit. Twitter. App Store reviews. Academic journals. </p>
+                <p class="research-lede">We went looking for the truth about what happens to family relationships when distance becomes the default. Reddit. Twitter. App Store reviews. </p>
             </div>
             <div class="carousel-wrap reveal">
                 <div class="research-findings" id="research-carousel">
                     <div class="finding-card">
                         <h3>Parents' tech calls are actually loneliness calls</h3>
-                        <p>When mum calls about a popup on her laptop, she doesn't need IT help. She needs to hear your voice. Every small tech problem becomes a legitimate reason to reach out — because there's no other easy, low-pressure way to say "I miss you."</p>
+                        <p>When mum calls about her laptop, she doesn't need IT help. She needs to hear your voice. Tech problems become a reason to reach out because there's no other low-pressure way to say "I miss you."</p>
                         <span class="finding-source">r/AgingParents · <strong>114 upvotes</strong></span>
                     </div>
                     <div class="finding-card">
                         <h3>Having kids makes the distance unbearable</h3>
-                        <p>Moving abroad was manageable before children. But once you're a parent, the weight of your own parents not being there — not seeing first steps, not being part of the village — becomes something you carry every single day.</p>
+                        <p>Moving abroad was manageable before children. But once you're a parent, the weight of your own parents not being there — becomes something you carry every single day.</p>
                         <span class="finding-source">r/expats · <strong>214 upvotes</strong></span>
                     </div>
                     <div class="finding-card">
-                        <h3>WhatsApp becomes toxic when it matters most</h3>
-                        <p>When aging parents need care, family group chats turn into guilt trips and blame games. Siblings weaponize distance. The tool designed for communication becomes the source of family conflict at the worst possible time.</p>
-                        <span class="finding-source">Leaked family chat · r/Bolehland · <strong>1,050 upvotes</strong></span>
-                    </div>
-                    <div class="finding-card">
                         <h3>Existing apps are failing on the thing that matters most</h3>
-                        <p>We analyzed thousands of App Store reviews for family apps. The #1 complaint: no time zone awareness. Followed closely by: too complicated for parents, feels like just another social media app, and no way to participate without posting content.</p>
+                        <p>We analyzed thousands of App Store reviews for family apps. The #1 complaint: no time zone awareness. Followed closely by: too complicated for parents.</p>
                         <span class="finding-source">App Store review analysis · Jia Research, 2026</span>
                     </div>
                 </div>
@@ -915,7 +1085,6 @@
         <div class="letter-inner reveal">
             <h2>We're building this because we've <em>lived it.</em></h2>
             <p>If you've ever sat in a different time zone, staring at your phone, wondering if it's too late to call - this is for you.</p>
-            <p>If you've ever opened a family group chat to a wall of unread messages and felt too tired to catch up - this is for you.</p>
             <p>We built Jia because we believe families shouldn't need to choose between moving back and feeling close. Distance is the reality. But disconnection doesn't have to be.</p>
             <p>We're not building another messaging app. We're building the feeling of being home — even when home is 10,000 kilometres away.</p>
             <p class="letter-sig">— The Jia team</p>
@@ -942,7 +1111,10 @@
 
     <footer class="site-footer">
         <p class="footer-mark">Jia</p>
-        <p>Made with love for families far apart
+        <p>Made with love for families far apart</p>
+        <a href="https://www.instagram.com/jia.app/" target="_blank" rel="noopener" aria-label="Jia on Instagram" class="footer-ig">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
+        </a>
     </footer>
 
     <script>
@@ -1073,23 +1245,23 @@
         // Cloud definitions
         var cloudDefs = [
             // Far — large, slow, translucent
-            { xFrac: 0.0,   yFrac: 0.0,   w: 1050, h: 450, speed: 2.5,  alpha: 0.55, seed: 7  },
-            { xFrac: 0.5,   yFrac: 0.04,  w: 1200, h: 500, speed: 2,    alpha: 0.5,  seed: 13 },
-            { xFrac: 0.25,  yFrac: 0.16,  w: 1100, h: 470, speed: 3,    alpha: 0.45, seed: 23 },
+            { xFrac: 0.0,   yFrac: 0.0,   w: 1050, h: 450, speed: 4,    alpha: 0.55, seed: 7  },
+            { xFrac: 0.5,   yFrac: 0.04,  w: 1200, h: 500, speed: 3,    alpha: 0.5,  seed: 13 },
+            { xFrac: 0.25,  yFrac: 0.16,  w: 1100, h: 470, speed: 4.5,  alpha: 0.45, seed: 23 },
 
             // Mid
-            { xFrac: 0.08,  yFrac: 0.0,   w: 780, h: 340, speed: 5.5,  alpha: 0.75, seed: 37 },
-            { xFrac: 0.45,  yFrac: 0.1,   w: 840, h: 370, speed: 5,    alpha: 0.7,  seed: 47 },
-            { xFrac: 0.72,  yFrac: 0.18,  w: 720, h: 310, speed: 6,    alpha: 0.65, seed: 59 },
-            { xFrac: 0.15,  yFrac: 0.28,  w: 800, h: 340, speed: 4.5,  alpha: 0.6,  seed: 67 },
+            { xFrac: 0.08,  yFrac: 0.0,   w: 780, h: 340, speed: 8,    alpha: 0.75, seed: 37 },
+            { xFrac: 0.45,  yFrac: 0.1,   w: 840, h: 370, speed: 7.5,  alpha: 0.7,  seed: 47 },
+            { xFrac: 0.72,  yFrac: 0.18,  w: 720, h: 310, speed: 9,    alpha: 0.65, seed: 59 },
+            { xFrac: 0.15,  yFrac: 0.28,  w: 800, h: 340, speed: 7,    alpha: 0.6,  seed: 67 },
 
             // Near — sharper, faster
-            { xFrac: 0.35,  yFrac: 0.0,   w: 600, h: 270, speed: 10,   alpha: 0.9,  seed: 79 },
-            { xFrac: 0.78,  yFrac: 0.11,  w: 540, h: 240, speed: 8.5,  alpha: 0.85, seed: 89 },
+            { xFrac: 0.35,  yFrac: 0.0,   w: 600, h: 270, speed: 15,   alpha: 0.9,  seed: 79 },
+            { xFrac: 0.78,  yFrac: 0.11,  w: 540, h: 240, speed: 13,   alpha: 0.85, seed: 89 },
 
             // Horizon haze
-            { xFrac: -0.05, yFrac: 0.42,  w: 1350, h: 500, speed: 1.3,  alpha: 0.3,  seed: 97  },
-            { xFrac: 0.32,  yFrac: 0.48,  w: 1230, h: 460, speed: 1,    alpha: 0.25, seed: 103 },
+            { xFrac: -0.05, yFrac: 0.42,  w: 1350, h: 500, speed: 2,    alpha: 0.3,  seed: 97  },
+            { xFrac: 0.32,  yFrac: 0.48,  w: 1230, h: 460, speed: 1.5,  alpha: 0.25, seed: 103 },
         ];
 
         var clouds = [];
@@ -1284,6 +1456,55 @@
     if (heroForm) heroForm.addEventListener('submit', function(e) { submitWaitlist(e, 'hero-waitlist-form', 'hero-success', 'hero-form-container'); });
     var ctaForm = document.getElementById('cta-waitlist-form');
     if (ctaForm) ctaForm.addEventListener('submit', function(e) { submitWaitlist(e, 'cta-waitlist-form', 'cta-success', 'cta-form-container'); });
+    </script>
+
+    <script>
+    // ==========================================
+    // NAV + PAGE TRANSITION
+    // ==========================================
+    (function() {
+        var nav = document.getElementById('cloud-nav');
+        var trigger = document.getElementById('nav-trigger');
+        var links = nav.querySelectorAll('.nav-link');
+        var pt = document.getElementById('page-transition');
+
+        trigger.addEventListener('click', function() {
+            nav.classList.toggle('open');
+            trigger.setAttribute('aria-expanded', nav.classList.contains('open'));
+        });
+        document.addEventListener('click', function(e) {
+            if (nav.classList.contains('open') && !nav.contains(e.target)) {
+                nav.classList.remove('open');
+                trigger.setAttribute('aria-expanded', 'false');
+            }
+        });
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && nav.classList.contains('open')) { nav.classList.remove('open'); trigger.setAttribute('aria-expanded', 'false'); }
+        });
+
+        for (var i = 0; i < links.length; i++) {
+            links[i].addEventListener('click', function(e) {
+                e.preventDefault();
+                var href = this.getAttribute('href');
+                nav.classList.remove('open');
+                pt.classList.add('active', 'expanding');
+                setTimeout(function() {
+                    sessionStorage.setItem('jia-cloud-transition', '1');
+                    window.location.href = href;
+                }, 950);
+            });
+        }
+
+        if (sessionStorage.getItem('jia-cloud-transition')) {
+            sessionStorage.removeItem('jia-cloud-transition');
+            pt.classList.add('active', 'entrance');
+            pt.offsetHeight;
+            pt.classList.add('shrinking');
+            setTimeout(function() {
+                pt.classList.remove('active', 'entrance', 'shrinking');
+            }, 1400);
+        }
+    })();
     </script>
 </body>
 </html>
