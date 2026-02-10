@@ -236,47 +236,35 @@
         /* ===================== QUOTE ===================== */
         .quote-section {
             background: var(--muslin);
-            padding: var(--s-96) var(--section-x);
+            padding: var(--s-120) var(--section-x);
             display: flex;
             justify-content: center;
         }
         .quote-inner {
-            max-width: 580px;
-            background: var(--cream);
-            padding: var(--s-48) var(--s-56);
-            border-radius: var(--radius-lg);
-            box-shadow: 0 4px 32px rgba(139, 115, 85, 0.06);
+            max-width: 680px;
             text-align: center;
             position: relative;
         }
         .quote-inner::before {
-            content: '\201C';
-            font-family: var(--font-display);
-            font-size: 5rem;
-            color: var(--terracotta);
-            opacity: 0.2;
-            position: absolute;
-            top: var(--s-8);
-            left: var(--s-32);
-            line-height: 1;
+            content: '';
+            display: block;
+            width: 48px;
+            height: 3px;
+            background: var(--terracotta);
+            border-radius: 2px;
+            margin: 0 auto var(--s-32);
         }
-        .quote-section blockquote {
+        .quote-section .quote-text {
             font-family: var(--font-display);
             font-style: italic;
-            font-size: clamp(1.2rem, 2.6vw, 1.6rem);
+            font-size: clamp(1.5rem, 3.2vw, 2.2rem);
             color: var(--warm-black);
-            line-height: 1.55;
-            font-weight: 300;
-            margin-bottom: var(--s-16);
+            line-height: 1.45;
+            font-weight: 400;
         }
-        .quote-section cite {
-            font-family: var(--font-body);
-            font-style: normal;
-            font-size: 0.82rem;
-            color: var(--warm-gray-light);
-            font-weight: 300;
-            line-height: 1.6;
-            display: block;
+        .quote-section .quote-text em {
+            font-style: italic;
+            color: var(--terracotta);
         }
 
         /* ===================== PROBLEM ===================== */
@@ -501,7 +489,7 @@
         .pivot-text {
             font-family: var(--font-body);
             font-style: italic;
-            font-size: clamp(1.0rem, 2vw, 1.4rem);
+            font-size: clamp(0.85rem, 1.6vw, 1.15rem);
             color: var(--warm-black);
             line-height: 1.45;
             max-width: 620px;
@@ -535,7 +523,7 @@
 
         .feature-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(3, 1fr);
             gap: var(--s-24);
         }
         .feature-card {
@@ -816,7 +804,7 @@
             .problem-inner { grid-template-columns: 1fr; gap: var(--s-48); }
             .problem-text { position: static; text-align: center; }
             .problem-lede { max-width: 480px; margin: 0 auto; }
-            .feature-grid { grid-template-columns: 1fr; }
+            .feature-grid { grid-template-columns: 1fr 1fr; }
             .stats { padding: var(--s-48) var(--section-x); }
             .stats-inner { flex-direction: column; gap: var(--s-32); align-items: center; }
             .stat { width: 100%; max-width: 400px; }
@@ -842,9 +830,8 @@
             .form-note { font-size: 0.68rem; }
 
             /* Quote */
-            .quote-section { padding: var(--s-64) var(--section-x); }
-            .quote-inner { padding: var(--s-32) var(--s-24); }
-            .quote-inner::before { font-size: 3.5rem; left: var(--s-16); }
+            .quote-section { padding: var(--s-80) var(--section-x); }
+            .quote-section .quote-text { font-size: clamp(1.3rem, 6vw, 1.6rem); }
 
             /* Problem */
             .problem-item { grid-template-columns: 1fr; padding: var(--s-16) var(--s-24); }
@@ -861,7 +848,7 @@
 
             /* Pivot */
             .pivot { padding: var(--s-80) var(--section-x); }
-            .pivot-text { font-size: clamp(1.25rem, 5.5vw, 1.5rem); }
+            .pivot-text { font-size: clamp(1.0rem, 4.5vw, 1.15rem); }
 
             /* Stats */
             .stats { padding: var(--s-40) var(--section-x); }
@@ -871,6 +858,7 @@
             .stat p { font-size: 0.72rem; max-width: 260px; }
 
             /* Features */
+            .feature-grid { grid-template-columns: 1fr; }
             .feature-card { padding: var(--s-24); }
             .feature-title { font-size: 1.1rem; }
             .feature-desc { font-size: 0.84rem; }
@@ -935,8 +923,7 @@
 
     <section class="quote-section">
         <div class="quote-inner reveal">
-            <blockquote>"You become a memory, then not even that."</blockquote>
-            <cite>An expat living abroad for 15 years, on what happens when distance becomes the default</cite>
+            <p class="quote-text">What if being away from home doesn't mean that you have to <em>drift away</em> from your parents and siblings?</p>
         </div>
     </section>
 
@@ -1029,9 +1016,6 @@
         </div>
     </section>
 
-    <section class="pivot">
-        <p class="pivot-text reveal">What if being away from home doesn't mean that you have to drift away from your parents and siblings?</p>
-    </section>
 
     <section class="solution">
         <div class="solution-inner">
@@ -1056,7 +1040,7 @@
                 <div class="feature-card reveal reveal-d1">
                     <span class="feature-num">03</span>
                     <div class="feature-title">Overlap Finder</div>
-                    <p class="feature-desc">Jia finds windows when everyone's awake & available — so calls happen effortlessly.</p>
+                    <p class="feature-desc">Jia finds windows when everyone's awake & available, so calls happen effortlessly.</p>
                     <span class="feature-tag">Time zone aware</span>
                 </div>
                 <div class="feature-card reveal reveal-d2">
